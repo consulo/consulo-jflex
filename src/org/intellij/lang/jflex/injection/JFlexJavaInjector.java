@@ -1,92 +1,104 @@
 package org.intellij.lang.jflex.injection;
 
-import com.intellij.lang.StdLanguages;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.InjectedLanguagePlaces;
-import com.intellij.psi.LanguageInjector;
-import com.intellij.psi.PsiLanguageInjectionHost;
 import org.intellij.lang.jflex.options.JFlexSettings;
 import org.intellij.lang.jflex.psi.JFlexElement;
 import org.intellij.lang.jflex.psi.JFlexJavaCode;
 import org.intellij.lang.jflex.psi.JFlexPsiFile;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.java.JavaLanguage;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.InjectedLanguagePlaces;
+import com.intellij.psi.LanguageInjector;
+import com.intellij.psi.PsiLanguageInjectionHost;
 
-public class JFlexJavaInjector implements LanguageInjector {
+public class JFlexJavaInjector implements LanguageInjector
+{
+	public static final String DEFCLASS = "Yylex";
+	public static final String DEFTYPE = "int";
 
-    public static final String DEFCLASS = "Yylex";
-    public static final String DEFTYPE = "int";
+	public JFlexJavaInjector()
+	{
+	}
 
-    private JFlexSettings settings;
+	public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost tempHost, @NotNull InjectedLanguagePlaces registrar)
+	{
 
-    public JFlexJavaInjector() {
-        settings = JFlexSettings.getInstance();
-    }
+		if(tempHost instanceof JFlexJavaCode)
+		{
+			final JFlexSettings instance = JFlexSettings.getInstance(tempHost.getProject());
 
-    public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost _host, @NotNull InjectedLanguagePlaces registrar) {
+			if(!instance.ENABLED_EMBED_JAVA)
+			{
+				return;
+			}
 
-        if (_host instanceof JFlexJavaCode) {
+			JFlexJavaCode host = (JFlexJavaCode) tempHost;
 
-            if (!settings.ENABLED_EMBED_JAVA) return;
+			assert host.getContainingFile() instanceof JFlexPsiFile;
+			JFlexPsiFile file = (JFlexPsiFile) host.getContainingFile();
 
-            JFlexJavaCode host = (JFlexJavaCode) _host;
+			JFlexJavaCode importSection = file.getImports();
+			//processing imports and package section
+			if(importSection == host)
+			{
+				registrar.addPlace(JavaLanguage.INSTANCE, new TextRange(0, host.getTextLength()), null, "\npublic class a{}");
+				return;
+			}
 
-            assert host.getContainingFile() instanceof JFlexPsiFile;
-            JFlexPsiFile file = (JFlexPsiFile) host.getContainingFile();
+			StringBuilder prefix = new StringBuilder();
 
-            JFlexJavaCode importSection = file.getImports();
-            //processing imports and package section
-            if (importSection == host) {
-                registrar.addPlace(StdLanguages.JAVA, new TextRange(0, host.getTextLength()), null, "\npublic class a{}");
-                return;
-            }
+			//let's add some imports and package statements from flex file header
+			if(importSection != null)
+			{
+				prefix.append(importSection.getText());
+			}
 
-            StringBuilder prefix = new StringBuilder();
+			String classnamestr = DEFCLASS;
+			JFlexElement classname = file.getClassname();
+			if(classname != null)
+			{
+				classnamestr = classname.getText();
+			}
 
-            //let's add some imports and package statements from flex file header
-            if (importSection != null) {
-                prefix.append(importSection.getText());
-            }
+			String returntypestr = DEFTYPE;
+			JFlexElement returntype = file.getReturnType();
+			if(returntype != null)
+			{
+				returntypestr = returntype.getText();
+			}
 
-            String classnamestr = DEFCLASS;
-            JFlexElement classname = file.getClassname();
-            if (classname != null) {
-                classnamestr = classname.getText();
-            }
+			StringBuilder implementedstr = new StringBuilder();
+			JFlexElement[] implemented = file.getImplementedInterfaces();
+			//what a lousy piece of code.
+			if(implemented.length > 0)
+			{
+				implementedstr.append(" implements ");
+				for(int i = 0; i < implemented.length; i++)
+				{
+					JFlexElement jFlexElement = implemented[i];
+					implementedstr.append(jFlexElement.getText());
+					if(i < implemented.length - 1)
+					{
+						implementedstr.append(",");
+					}
+				}
+			}
 
-            String returntypestr = DEFTYPE;
-            JFlexElement returntype = file.getReturnType();
-            if (returntype != null) {
-                returntypestr = returntype.getText();
-            }
+			prefix.append("\npublic class ").append(classnamestr).append(implementedstr.toString()).append("{");
 
-            StringBuilder implementedstr = new StringBuilder();
-            JFlexElement[] implemented = file.getImplementedInterfaces();
-            //what a lousy piece of code.
-            if (implemented.length > 0) {
-                implementedstr.append(" implements ");
-                for (int i = 0; i < implemented.length; i++) {
-                    JFlexElement jFlexElement = implemented[i];
-                    implementedstr.append(jFlexElement.getText());
-                    if (i < implemented.length - 1) {
-                        implementedstr.append(",");
-                    }
-                }
-            }
+			StringBuilder suffix = new StringBuilder();
 
-            prefix.append("\npublic class ").append(classnamestr).append(implementedstr.toString()).append("{");
+			if(host.isMatchAction())
+			{
+				prefix.append("public ").append(returntypestr).append(" yylex(){");
+				suffix.append("}}");
+			}
+			else
+			{
+				suffix.append("}");
+			}
 
-            StringBuilder suffix = new StringBuilder();
-
-            if (host.isMatchAction()) {
-                prefix.append("public ").append(returntypestr).append(" yylex(){");
-                suffix.append("}}");
-            } else {
-                suffix.append("}");
-            }
-
-            registrar.addPlace(StdLanguages.JAVA, new TextRange(0, host.getTextLength()), prefix.toString(), suffix.toString());
-
-        }
-
-    }
+			registrar.addPlace(JavaLanguage.INSTANCE, new TextRange(0, host.getTextLength()), prefix.toString(), suffix.toString());
+		}
+	}
 }

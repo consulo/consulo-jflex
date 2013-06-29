@@ -6,7 +6,6 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
-import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.Language;
 import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.editor.JFlexHighlighterColors;
@@ -95,6 +94,6 @@ final class JFlexColorPage implements ColorSettingsPage {
 
     @Nullable
     public Icon getIcon() {
-        return JFlexFileType.FILE_TYPE.getIcon();
+        return JFlexFileType.INSTANCE.getIcon();
     }
 }

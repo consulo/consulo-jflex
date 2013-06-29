@@ -8,50 +8,68 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.project.Project;
 
 /**
  * Configurable for JFlex.
  *
  * @author Alexey Efimov
  */
-public final class JFlexConfigurable implements Configurable {
-    private JFlexSettingsForm settingsForm;
+public final class JFlexConfigurable implements Configurable
+{
+	private JFlexSettingsForm settingsForm;
+	private JFlexSettings myJFlexSettings;
 
-    @Nls
-    public String getDisplayName() {
-        return JFlexBundle.message("jflex");
-    }
+	public JFlexConfigurable(Project project)
+	{
+		myJFlexSettings = JFlexSettings.getInstance(project);
+	}
 
-    @Nullable
-    @NonNls
-    public String getHelpTopic() {
-        return null;
-    }
+	@Nls
+	public String getDisplayName()
+	{
+		return JFlexBundle.message("jflex");
+	}
 
-    public JComponent createComponent() {
-        if (settingsForm == null) {
-            settingsForm = new JFlexSettingsForm(JFlexSettings.getInstance());
-        }
-        return settingsForm.getFormComponent();
-    }
+	@Nullable
+	@NonNls
+	public String getHelpTopic()
+	{
+		return null;
+	}
 
-    public boolean isModified() {
-        return settingsForm != null && settingsForm.isModified(JFlexSettings.getInstance());
-    }
+	public JComponent createComponent()
+	{
+		if(settingsForm == null)
+		{
+			settingsForm = new JFlexSettingsForm(myJFlexSettings);
+		}
+		return settingsForm.getFormComponent();
+	}
 
-    public void apply() throws ConfigurationException {
-        if (settingsForm != null) {
-            JFlexSettings.getInstance().loadState(settingsForm.getState());
-        }
-    }
+	public boolean isModified()
+	{
+		return settingsForm != null && settingsForm.isModified(myJFlexSettings);
+	}
 
-    public void reset() {
-        if (settingsForm != null) {
-            settingsForm.loadState(JFlexSettings.getInstance());
-        }
-    }
+	public void apply() throws ConfigurationException
+	{
+		if(settingsForm != null)
+		{
+			myJFlexSettings.loadState(settingsForm.getState());
+		}
+	}
 
-    public void disposeUIResources() {
-        settingsForm = null;
-    }
+	public void reset()
+	{
+		if(settingsForm != null)
+		{
+			settingsForm.loadState(myJFlexSettings);
+		}
+	}
+
+	public void disposeUIResources()
+	{
+		settingsForm = null;
+	}
 }
