@@ -1,19 +1,20 @@
 package org.intellij.lang.jflex.psi.impl;
 
+import java.util.List;
+
+import org.intellij.lang.jflex.JFlexElementTypes;
+import org.intellij.lang.jflex.injection.EmbeddedJavaLiteralTextEscaper;
+import org.intellij.lang.jflex.psi.JFlexJavaCode;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
-import org.intellij.lang.jflex.JFlexElementTypes;
-import org.intellij.lang.jflex.injection.EmbeddedJavaLiteralTextEscaper;
-import org.intellij.lang.jflex.psi.JFlexJavaCode;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +41,7 @@ public class JFlexJavaCodeImpl extends JFlexElementImpl implements JFlexJavaCode
     @Nullable
     @Deprecated
     public List<Pair<PsiElement, TextRange>> getInjectedPsi() {
-        return InjectedLanguageUtil.getInjectedPsiFiles(this);
+        return InjectedLanguageManager.getInstance(getProject()).getInjectedPsiFiles(this);
     }
 
     public void processInjectedPsi(@NotNull InjectedPsiVisitor visitor) {

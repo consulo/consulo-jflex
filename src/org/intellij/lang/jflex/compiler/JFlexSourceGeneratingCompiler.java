@@ -1,13 +1,31 @@
 package org.intellij.lang.jflex.compiler;
 
-import com.intellij.compiler.CompilerConfiguration;
+import java.io.DataInput;
+import java.io.File;
+import java.io.IOException;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.intellij.lang.jflex.fileTypes.JFlexFileType;
+import org.intellij.lang.jflex.psi.JFlexElement;
+import org.intellij.lang.jflex.psi.JFlexPsiFile;
+import org.intellij.lang.jflex.util.JFlexBundle;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.compiler.impl.CompilerUtil;
 import com.intellij.execution.CantRunException;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.compiler.*;
-import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.compiler.CompileContext;
+import com.intellij.openapi.compiler.CompileScope;
+import com.intellij.openapi.compiler.CompilerManager;
+import com.intellij.openapi.compiler.CompilerMessageCategory;
+import com.intellij.openapi.compiler.SourceGeneratingCompiler;
+import com.intellij.openapi.compiler.TimestampValidityState;
+import com.intellij.openapi.compiler.ValidityState;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -19,20 +37,6 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import org.intellij.lang.jflex.fileTypes.JFlexFileType;
-import org.intellij.lang.jflex.psi.JFlexElement;
-import org.intellij.lang.jflex.psi.JFlexPsiFile;
-import org.intellij.lang.jflex.util.JFlexBundle;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.DataInput;
-import java.io.File;
-import java.io.IOException;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * The source generating compiler for *.flex files.
@@ -173,9 +177,9 @@ public class JFlexSourceGeneratingCompiler implements SourceGeneratingCompiler {
             CompileScope compileScope = context.getCompileScope();
             VirtualFile[] files = compileScope.getFiles(JFlexFileType.FILE_TYPE, false);
             List<GenerationItem> items = new ArrayList<GenerationItem>(files.length);
-            CompilerConfiguration compilerConfiguration = CompilerConfiguration.getInstance(context.getProject());
+            CompilerManager compilerManager = CompilerManager.getInstance(context.getProject());
             for (VirtualFile file : files) {
-                if (context.isMake() && compilerConfiguration.isExcludedFromCompilation(file)) {
+                if (context.isMake() && compilerManager.isExcludedFromCompilation(file)) {
                     continue;
                 }
                 JFlexGenerationItem generationItem = new JFlexGenerationItem(context.getModuleByFile(file), file, fileIndex.isInTestSourceContent(file));

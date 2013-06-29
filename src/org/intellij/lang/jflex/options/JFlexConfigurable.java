@@ -1,13 +1,13 @@
 package org.intellij.lang.jflex.options;
 
-import javax.swing.*;
+import javax.swing.JComponent;
 
-import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
 import org.intellij.lang.jflex.util.JFlexBundle;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.options.Configurable;
+import com.intellij.openapi.options.ConfigurationException;
 
 /**
  * Configurable for JFlex.
@@ -20,11 +20,6 @@ public final class JFlexConfigurable implements Configurable {
     @Nls
     public String getDisplayName() {
         return JFlexBundle.message("jflex");
-    }
-
-    @Nullable
-    public Icon getIcon() {
-        return null;
     }
 
     @Nullable

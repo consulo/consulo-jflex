@@ -1,32 +1,25 @@
 package org.intellij.lang.jflex.parser;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiParser;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.tree.IElementType;
+import org.consulo.lombok.annotations.Logger;
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.util.JFlexBundle;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageVersion;
+import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiParser;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Parser.
  *
  * @author Alexey Efimov, Max Ishchenko
  */
+@Logger
 public class JFlexParser implements PsiParser {
-
-    private static final Logger LOG = Logger.getInstance("#JFlexParser");
-
-    private final Project project;
-
-    public JFlexParser(Project project) {
-        this.project = project;
-    }
-
     @NotNull
-    public ASTNode parse(IElementType root, PsiBuilder builder) {
+	@Override
+    public ASTNode parse(IElementType root, PsiBuilder builder, LanguageVersion languageVersion) {
 
         final PsiBuilder.Marker rootMarker = builder.mark();
 
@@ -159,7 +152,7 @@ public class JFlexParser implements PsiParser {
     }
 
     private void parseTypeStatement(PsiBuilder builder) {
-        LOG.assertTrue(builder.getTokenType() == JFlexElementTypes.TYPE_KEYWORD);
+		LOGGER.assertTrue(builder.getTokenType() == JFlexElementTypes.TYPE_KEYWORD);
         PsiBuilder.Marker marker = builder.mark();
         builder.advanceLexer();
         parseOptionParamExpression(builder);
@@ -173,7 +166,7 @@ public class JFlexParser implements PsiParser {
     }
 
     private void parseClassStatement(PsiBuilder builder) {
-        LOG.assertTrue(builder.getTokenType() == JFlexElementTypes.CLASS_KEYWORD);
+        LOGGER.assertTrue(builder.getTokenType() == JFlexElementTypes.CLASS_KEYWORD);
         PsiBuilder.Marker marker = builder.mark();
         builder.advanceLexer();
         parseOptionParamExpression(builder);
