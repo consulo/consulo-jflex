@@ -1,31 +1,11 @@
 package org.intellij.lang.jflex.compiler;
 
-import java.io.DataInput;
-import java.io.File;
-import java.io.IOException;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.intellij.lang.jflex.fileTypes.JFlexFileType;
-import org.intellij.lang.jflex.psi.JFlexElement;
-import org.intellij.lang.jflex.psi.JFlexPsiFile;
-import org.intellij.lang.jflex.util.JFlexBundle;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.compiler.impl.CompilerUtil;
 import com.intellij.execution.CantRunException;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.compiler.CompileContext;
-import com.intellij.openapi.compiler.CompileScope;
-import com.intellij.openapi.compiler.CompilerManager;
-import com.intellij.openapi.compiler.CompilerMessageCategory;
-import com.intellij.openapi.compiler.SourceGeneratingCompiler;
-import com.intellij.openapi.compiler.TimestampValidityState;
-import com.intellij.openapi.compiler.ValidityState;
+import com.intellij.openapi.compiler.*;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
@@ -36,6 +16,21 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import org.intellij.lang.jflex.fileTypes.JFlexFileType;
+import org.intellij.lang.jflex.options.JFlexSettings;
+import org.intellij.lang.jflex.psi.JFlexElement;
+import org.intellij.lang.jflex.psi.JFlexPsiFile;
+import org.intellij.lang.jflex.util.JFlexBundle;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.DataInput;
+import java.io.File;
+import java.io.IOException;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The source generating compiler for *.flex files.
@@ -97,6 +92,11 @@ public class JFlexSourceGeneratingCompiler implements SourceGeneratingCompiler
 		if(affectedModules.length > 0)
 		{
 			Project project = affectedModules[0].getProject();
+			if(!JFlexSettings.getInstance(project).ENABLED_COMPILATION)
+			{
+				return true;
+			}
+
 			VirtualFile[] files = scope.getFiles(JFlexFileType.INSTANCE, false);
 			if(files.length > 0)
 			{
