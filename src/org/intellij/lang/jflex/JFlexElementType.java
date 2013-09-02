@@ -10,7 +10,7 @@ public class JFlexElementType extends IElementType {
     private final IElementType parsedType;
 
     public JFlexElementType(@NotNull @NonNls String debugName, IElementType parsedType) {
-        super(debugName, JFlexLanguage.LANGUAGE);
+        super(debugName, JFlexLanguage.INSTANCE);
         this.parsedType = parsedType;
     }
 

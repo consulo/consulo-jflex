@@ -1,15 +1,6 @@
 package org.intellij.lang.jflex.parser;
 
-import org.intellij.lang.jflex.JFlexElementTypes;
-import org.intellij.lang.jflex.lexer.JFlexParsingLexer;
-import org.intellij.lang.jflex.psi.impl.*;
-import org.jetbrains.annotations.NotNull;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.lang.LanguageUtil;
-import com.intellij.lang.LanguageVersion;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.PsiParser;
+import com.intellij.lang.*;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
@@ -18,6 +9,12 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.util.LanguageVersionUtil;
+import org.intellij.lang.jflex.JFlexElementTypes;
+import org.intellij.lang.jflex.JFlexLanguage;
+import org.intellij.lang.jflex.lexer.JFlexParsingLexer;
+import org.intellij.lang.jflex.psi.impl.*;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * JFlex parser.
@@ -114,7 +111,7 @@ public class JFlexParserDefinition implements ParserDefinition
 
 	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
 	{
-		final Lexer lexer = createLexer(null, Language.UNKNOWN_VERSION);
+		final Lexer lexer = createLexer(null, LanguageVersionUtil.findDefaultVersion(JFlexLanguage.INSTANCE));
 		return LanguageUtil.canStickTokensTogetherByLexer(left, right, lexer);
 	}
 

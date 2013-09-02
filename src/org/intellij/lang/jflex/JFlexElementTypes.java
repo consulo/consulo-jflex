@@ -1,13 +1,12 @@
 package org.intellij.lang.jflex;
 
-import com.intellij.lang.Language;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 
 public interface JFlexElementTypes {
-    IFileElementType FILE = new IFileElementType(JFlexLanguage.LANGUAGE);
+    IFileElementType FILE = new IFileElementType(JFlexLanguage.INSTANCE);
 
     IElementType BAD_CHARACTER = TokenType.BAD_CHARACTER;
     IElementType WHITE_SPACE = TokenType.WHITE_SPACE;

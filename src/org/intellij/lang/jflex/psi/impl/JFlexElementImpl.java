@@ -24,7 +24,7 @@ public class JFlexElementImpl extends ASTWrapperPsiElement implements JFlexEleme
 
     @NotNull
     public Language getLanguage() {
-        return JFlexLanguage.LANGUAGE;
+        return JFlexLanguage.INSTANCE;
     }
 
     public String toString() {

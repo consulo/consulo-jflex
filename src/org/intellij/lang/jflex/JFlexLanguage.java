@@ -5,7 +5,6 @@ import com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import org.intellij.lang.jflex.fileTypes.JFlexSyntaxHighlighter;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -14,13 +13,10 @@ import org.jetbrains.annotations.NotNull;
  * @author Alexey Efimov
  */
 public class JFlexLanguage extends Language {
-    @NonNls
-    public static final String ID = "JFlex";
-
-    public static final JFlexLanguage LANGUAGE = new JFlexLanguage();
+    public static final JFlexLanguage INSTANCE = new JFlexLanguage();
 
     public JFlexLanguage() {
-        super(ID);
+        super("JFLEX");
 
         //somehow lang.syntaxHighlighterFactory extension won't work for me
         SyntaxHighlighterFactory.LANGUAGE_FACTORY.addExplicitExtension(this, new SingleLazyInstanceSyntaxHighlighterFactory() {

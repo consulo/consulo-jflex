@@ -10,11 +10,11 @@
 		<projectConfigurable displayName="JFlex" parentId="project.propCompiler" instance="org.intellij.lang.jflex.options.JFlexConfigurable" />
 
 		<colorSettingsPage implementation="org.intellij.lang.jflex.editor.colors.JFlexColorPage"/>
-		<lang.parserDefinition language="JFlex" implementationClass="org.intellij.lang.jflex.parser.JFlexParserDefinition"/>
-		<lang.documentationProvider language="JFlex" implementationClass="org.intellij.lang.jflex.JFlexDocumentationProvider"/>
-		<lang.findUsagesProvider language="JFlex" implementationClass="org.intellij.lang.jflex.JFlexFindUsagesProvider"/>
-		<lang.commenter language="JFlex" implementationClass="org.intellij.lang.jflex.JFlexCommenter"/>
-		<annotator language="JFlex" implementationClass="org.intellij.lang.jflex.validation.JFlexAnnotatingVisitor"/>
+		<lang.parserDefinition language="JFLEX" implementationClass="org.intellij.lang.jflex.parser.JFlexParserDefinition"/>
+		<lang.documentationProvider language="JFLEX" implementationClass="org.intellij.lang.jflex.JFlexDocumentationProvider"/>
+		<lang.findUsagesProvider language="JFLEX" implementationClass="org.intellij.lang.jflex.JFlexFindUsagesProvider"/>
+		<lang.commenter language="JFLEX" implementationClass="org.intellij.lang.jflex.JFlexCommenter"/>
+		<annotator language="JFLEX" implementationClass="org.intellij.lang.jflex.validation.JFlexAnnotatingVisitor"/>
 		<languageInjector implementation="org.intellij.lang.jflex.injection.JFlexJavaInjector"/>
 		<fileTypeFactory implementation="org.intellij.lang.jflex.fileTypes.JFlexFileTypeFactory"/>
 		<compiler implementation="org.intellij.lang.jflex.compiler.JFlexSourceGeneratingCompiler"/>

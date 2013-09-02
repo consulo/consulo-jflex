@@ -88,7 +88,7 @@ final class JFlexColorPage implements ColorSettingsPage {
 
     @NotNull
     public SyntaxHighlighter getHighlighter() {
-        Language jflexLanguage = JFlexLanguage.LANGUAGE;
+        Language jflexLanguage = JFlexLanguage.INSTANCE;
         return SyntaxHighlighterFactory.getSyntaxHighlighter(jflexLanguage, null, null);
     }
 

@@ -23,7 +23,7 @@ public class JFlexPsiFileImpl extends PsiFileBase implements JFlexPsiFile {
     public static final TokenSet STATESTATEMENTSET = TokenSet.create(JFlexElementTypes.STATE_STATEMENT);
 
     public JFlexPsiFileImpl(FileViewProvider viewProvider) {
-        super(viewProvider, JFlexLanguage.LANGUAGE);
+        super(viewProvider, JFlexLanguage.INSTANCE);
     }
 
     @Nullable

@@ -1,14 +1,14 @@
 package org.intellij.lang.jflex.fileTypes;
 
-import javax.swing.Icon;
-
+import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.intellij.openapi.util.IconLoader;
 import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.util.JFlexBundle;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.intellij.openapi.util.IconLoader;
+
+import javax.swing.*;
 
 /**
  * JFlex file type.
@@ -24,7 +24,7 @@ public final class JFlexFileType extends LanguageFileType
 
 	public JFlexFileType()
 	{
-		super(JFlexLanguage.LANGUAGE);
+		super(JFlexLanguage.INSTANCE);
 	}
 
 	@NotNull

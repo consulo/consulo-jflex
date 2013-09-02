@@ -1,16 +1,12 @@
 package org.intellij.lang.jflex.options;
 
-import java.io.File;
-
+import com.intellij.openapi.application.PathManager;
+import com.intellij.openapi.components.*;
+import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.consulo.lombok.annotations.ProjectService;
 import org.jetbrains.annotations.NonNls;
-import com.intellij.openapi.application.PathManager;
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
-import com.intellij.openapi.components.StorageScheme;
-import com.intellij.util.xmlb.XmlSerializerUtil;
+
+import java.io.File;
 
 /**
  * Options of JFlex.
@@ -22,7 +18,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 		name = "JFlexSettings",
 		storages = {
 				@Storage(file = StoragePathMacros.PROJECT_FILE),
-				@Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/compiler.xml", scheme = StorageScheme.DIRECTORY_BASED)
+				@Storage(file = StoragePathMacros.WORKSPACE_FILE, scheme = StorageScheme.DIRECTORY_BASED)
 		}
 )
 public final class JFlexSettings implements PersistentStateComponent<JFlexSettings>
@@ -34,7 +30,7 @@ public final class JFlexSettings implements PersistentStateComponent<JFlexSettin
 	@NonNls
 	static final String DEFAULT_OPTIONS_CHARAT_NOBAK = "--charat --nobak";
 
-	public boolean ENABLED_COMPILATION = true;
+	public boolean ENABLED_COMPILATION = false;
 	public String JFLEX_HOME = getDefaultJFlexHome();
 	public String SKELETON_PATH = getDefaultSkeletonPath(JFLEX_HOME);
 	public String COMMAND_LINE_OPTIONS = DEFAULT_OPTIONS_CHARAT_NOBAK;
