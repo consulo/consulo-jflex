@@ -1,13 +1,14 @@
 <idea-plugin version="2">
 	<name>JFlex Support</name>
 	<version>1.5.1</version>
+	<category>Grammar Languages</category>
 	<vendor>Alexey Efimov, Max Ishchenko, Jan Dolecek</vendor>
 	<description>Enables JFlex support in IntelliJ IDEA.</description>
 	<resource-bundle>org.intellij.lang.jflex.util.JFlexBundle</resource-bundle>
 	<depends>org.consulo.java</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<projectConfigurable displayName="JFlex" parentId="project.propCompiler" instance="org.intellij.lang.jflex.options.JFlexConfigurable" />
+		<projectConfigurable displayName="JFlex" instance="org.intellij.lang.jflex.options.JFlexConfigurable"/>
 
 		<colorSettingsPage implementation="org.intellij.lang.jflex.editor.colors.JFlexColorPage"/>
 		<lang.parserDefinition language="JFLEX" implementationClass="org.intellij.lang.jflex.parser.JFlexParserDefinition"/>
@@ -17,8 +18,7 @@
 		<annotator language="JFLEX" implementationClass="org.intellij.lang.jflex.validation.JFlexAnnotatingVisitor"/>
 		<languageInjector implementation="org.intellij.lang.jflex.injection.JFlexJavaInjector"/>
 		<fileTypeFactory implementation="org.intellij.lang.jflex.fileTypes.JFlexFileTypeFactory"/>
-		<compiler implementation="org.intellij.lang.jflex.compiler.JFlexSourceGeneratingCompiler"/>
-
+		<taskByVfsChange filetype="JFlex" implementationClass="org.intellij.lang.jflex.vfs.backgroundTask.JFlexBackgroundTaskByVfsChangeProvider"/>
 		<projectService serviceInterface="org.intellij.lang.jflex.options.JFlexSettings" serviceImplementation="org.intellij.lang.jflex.options.JFlexSettings"/>
 	</extensions>
 </idea-plugin>
