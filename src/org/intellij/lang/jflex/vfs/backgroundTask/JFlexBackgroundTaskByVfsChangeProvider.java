@@ -1,6 +1,6 @@
 package org.intellij.lang.jflex.vfs.backgroundTask;
 
-import org.consulo.java.platform.module.extension.JavaModuleExtension;
+import org.consulo.java.module.extension.JavaModuleExtension;
 import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsChangeProvider;
 import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsParameters;
 import org.jetbrains.annotations.NotNull;
