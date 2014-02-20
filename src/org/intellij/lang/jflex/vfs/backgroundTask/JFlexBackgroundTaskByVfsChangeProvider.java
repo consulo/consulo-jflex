@@ -26,27 +26,33 @@ public class JFlexBackgroundTaskByVfsChangeProvider implements BackgroundTaskByV
 	}
 
 	@Override
-	public void setDefaultParameters(@NotNull Project project, @NotNull VirtualFile virtualFile, @NotNull BackgroundTaskByVfsParameters backgroundTaskByVfsParameters)
+	public void setDefaultParameters(@NotNull Project project, @NotNull VirtualFile virtualFile, @NotNull BackgroundTaskByVfsParameters
+			backgroundTaskByVfsParameters)
 	{
 		Sdk sdk = null;
 		Module module = ModuleUtilCore.findModuleForFile(virtualFile, project);
-		if(module != null) {
+		if(module != null)
+		{
 			sdk = ModuleUtilCore.getSdk(module, JavaModuleExtension.class);
 		}
 
-		if(sdk == null) {
+		if(sdk == null)
+		{
 			sdk = SdkTable.getInstance().findBundleSdkByType(JavaSdk.class);
 		}
 
-		if(sdk == null) {
+		if(sdk == null)
+		{
 			sdk = SdkTable.getInstance().findMostRecentSdkOfType(JavaSdk.getInstance());
 		}
 
-		if(sdk != null) {
+		if(sdk != null)
+		{
 			String vmExecutablePath = JavaSdk.getInstance().getVMExecutablePath(sdk);
 			backgroundTaskByVfsParameters.setExePath(vmExecutablePath);
 		}
-		else {
+		else
+		{
 			backgroundTaskByVfsParameters.setExePath(SystemInfo.isWindows ? "java.exe" : "java");
 		}
 
