@@ -3,7 +3,11 @@ package org.intellij.lang.jflex.vfs.backgroundTask;
 import org.consulo.java.module.extension.JavaModuleExtension;
 import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsChangeProvider;
 import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsParameters;
+import org.intellij.lang.jflex.psi.JFlexElement;
+import org.intellij.lang.jflex.psi.JFlexPsiFile;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.generate.tostring.util.StringUtil;
+import com.intellij.ide.highlighter.JavaFileType;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
@@ -12,19 +16,15 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTable;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
+import com.intellij.util.ArrayUtil;
 
 /**
  * @author VISTALL
  * @since 07.10.13.
  */
-public class JFlexBackgroundTaskByVfsChangeProvider implements BackgroundTaskByVfsChangeProvider
+public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsChangeProvider
 {
-	@Override
-	public boolean validate(@NotNull Project project, @NotNull VirtualFile virtualFile)
-	{
-		return true;
-	}
-
 	@Override
 	public void setDefaultParameters(@NotNull Project project, @NotNull VirtualFile virtualFile, @NotNull BackgroundTaskByVfsParameters
 			backgroundTaskByVfsParameters)
@@ -59,6 +59,27 @@ public class JFlexBackgroundTaskByVfsChangeProvider implements BackgroundTaskByV
 		backgroundTaskByVfsParameters.setProgramParameters("-jar jflex/lib/jflex.jar --charat --nobak --skel idea-flex.skeleton $FilePath$");
 		backgroundTaskByVfsParameters.setWorkingDirectory("$FileParentPath$");
 		backgroundTaskByVfsParameters.setOutPath("$FileParentPath$");
+	}
+
+	@NotNull
+	@Override
+	public String[] getGeneratedFiles(@NotNull PsiFile psiFile)
+	{
+		if(!(psiFile instanceof JFlexPsiFile))
+		{
+			return ArrayUtil.EMPTY_STRING_ARRAY;
+		}
+		JFlexElement classname = ((JFlexPsiFile) psiFile).getClassname();
+		if(classname == null)
+		{
+			return ArrayUtil.EMPTY_STRING_ARRAY;
+		}
+		String text = classname.getText();
+		if(StringUtil.isEmpty(text))
+		{
+			return ArrayUtil.EMPTY_STRING_ARRAY;
+		}
+		return new String[] {"$OutPath$/" + text + JavaFileType.DOT_DEFAULT_EXTENSION};
 	}
 
 	@NotNull
