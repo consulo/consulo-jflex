@@ -3,6 +3,7 @@ package org.intellij.lang.jflex.vfs.backgroundTask;
 import org.consulo.java.module.extension.JavaModuleExtension;
 import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsChangeProvider;
 import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsParameters;
+import org.intellij.lang.jflex.fileTypes.JFlexFileType;
 import org.intellij.lang.jflex.psi.JFlexElement;
 import org.intellij.lang.jflex.psi.JFlexPsiFile;
 import org.jetbrains.annotations.NotNull;
@@ -23,8 +24,13 @@ import com.intellij.util.ArrayUtil;
  * @author VISTALL
  * @since 07.10.13.
  */
-public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsChangeProvider
+public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsChangeProvider.ByFileType
 {
+	public JFlexBackgroundTaskByVfsChangeProvider()
+	{
+		super(JFlexFileType.INSTANCE);
+	}
+
 	@Override
 	public void setDefaultParameters(@NotNull Project project, @NotNull VirtualFile virtualFile, @NotNull BackgroundTaskByVfsParameters
 			backgroundTaskByVfsParameters)
@@ -56,9 +62,16 @@ public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsC
 			backgroundTaskByVfsParameters.setExePath(SystemInfo.isWindows ? "java.exe" : "java");
 		}
 
-		backgroundTaskByVfsParameters.setProgramParameters("-jar jflex/lib/jflex.jar --charat --nobak --skel idea-flex.skeleton $FilePath$");
+		backgroundTaskByVfsParameters.setProgramParameters("-jar jflex/lib/jflex.jar $FilePath$");
 		backgroundTaskByVfsParameters.setWorkingDirectory("$FileParentPath$");
 		backgroundTaskByVfsParameters.setOutPath("$FileParentPath$");
+	}
+
+	@NotNull
+	@Override
+	public String getTemplateName()
+	{
+		return "JFlex";
 	}
 
 	@NotNull
@@ -80,12 +93,5 @@ public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsC
 			return ArrayUtil.EMPTY_STRING_ARRAY;
 		}
 		return new String[] {"$OutPath$/" + text + JavaFileType.DOT_DEFAULT_EXTENSION};
-	}
-
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "JFlex";
 	}
 }

@@ -18,7 +18,7 @@
 		<annotator language="JFLEX" implementationClass="org.intellij.lang.jflex.validation.JFlexAnnotatingVisitor"/>
 		<languageInjector implementation="org.intellij.lang.jflex.injection.JFlexJavaInjector"/>
 		<fileTypeFactory implementation="org.intellij.lang.jflex.fileTypes.JFlexFileTypeFactory"/>
-		<taskByVfsChange filetype="JFlex" implementationClass="org.intellij.lang.jflex.vfs.backgroundTask.JFlexBackgroundTaskByVfsChangeProvider"/>
+		<taskByVfsChange implementation="org.intellij.lang.jflex.vfs.backgroundTask.JFlexBackgroundTaskByVfsChangeProvider"/>
 		<projectService serviceInterface="org.intellij.lang.jflex.options.JFlexSettings" serviceImplementation="org.intellij.lang.jflex.options.JFlexSettings"/>
 	</extensions>
 </idea-plugin>
