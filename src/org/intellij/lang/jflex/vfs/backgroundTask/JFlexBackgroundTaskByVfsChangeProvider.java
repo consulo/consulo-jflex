@@ -1,5 +1,8 @@
 package org.intellij.lang.jflex.vfs.backgroundTask;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.consulo.java.module.extension.JavaModuleExtension;
 import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsChangeProvider;
 import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsParameters;
@@ -7,11 +10,13 @@ import org.intellij.lang.jflex.fileTypes.JFlexFileType;
 import org.intellij.lang.jflex.psi.JFlexElement;
 import org.intellij.lang.jflex.psi.JFlexPsiFile;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.ide.highlighter.JavaFileType;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.JavaSdk;
+import com.intellij.openapi.projectRoots.JavaSdkType;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTable;
 import com.intellij.openapi.util.SystemInfo;
@@ -52,17 +57,24 @@ public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsC
 			sdk = SdkTable.getInstance().findMostRecentSdkOfType(JavaSdk.getInstance());
 		}
 
+		List<String> parameters = new ArrayList<String>();
 		if(sdk != null)
 		{
-			String vmExecutablePath = JavaSdk.getInstance().getVMExecutablePath(sdk);
-			backgroundTaskByVfsParameters.setExePath(vmExecutablePath);
+			GeneralCommandLine generalCommandLine = new GeneralCommandLine();
+
+			((JavaSdkType) sdk).setupCommandLine(generalCommandLine, sdk);
+			parameters.addAll(generalCommandLine.getParametersList().getList());
 		}
 		else
 		{
 			backgroundTaskByVfsParameters.setExePath(SystemInfo.isWindows ? "java.exe" : "java");
 		}
 
-		backgroundTaskByVfsParameters.setProgramParameters("-jar jflex/lib/jflex.jar $FilePath$");
+		parameters.add("-jar");
+		parameters.add("jflex/lib/jflex.jar");
+		parameters.add("$FilePath$");
+
+		backgroundTaskByVfsParameters.setProgramParameters(StringUtil.join(parameters, " "));
 		backgroundTaskByVfsParameters.setWorkingDirectory("$FileParentPath$");
 		backgroundTaskByVfsParameters.setOutPath("$FileParentPath$");
 	}
