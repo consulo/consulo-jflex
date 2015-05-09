@@ -1,1 +1,1 @@
-![Build Status](http://must-be.org:8080/vulcan_web/statusImage?name=consulo-jflex)
+![Build Status](http://must-be.org/vulcan/statusImage?name=consulo-jflex)
