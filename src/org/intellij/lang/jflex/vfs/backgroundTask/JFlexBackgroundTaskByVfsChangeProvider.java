@@ -1,15 +1,5 @@
 package org.intellij.lang.jflex.vfs.backgroundTask;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.consulo.java.module.extension.JavaModuleExtension;
-import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsChangeProvider;
-import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsParameters;
-import org.intellij.lang.jflex.fileTypes.JFlexFileType;
-import org.intellij.lang.jflex.psi.JFlexElement;
-import org.intellij.lang.jflex.psi.JFlexPsiFile;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.ide.highlighter.JavaFileType;
 import com.intellij.openapi.module.Module;
@@ -24,6 +14,16 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ArrayUtil;
+import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsChangeProvider;
+import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsParameters;
+import org.intellij.lang.jflex.fileTypes.JFlexFileType;
+import org.intellij.lang.jflex.psi.JFlexElement;
+import org.intellij.lang.jflex.psi.JFlexPsiFile;
+import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.java.module.extension.JavaModuleExtension;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author VISTALL
@@ -49,7 +49,7 @@ public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsC
 
 		if(sdk == null)
 		{
-			sdk = SdkTable.getInstance().findBundleSdkByType(JavaSdk.class);
+			sdk = SdkTable.getInstance().findPredefinedSdkByType(JavaSdk.getInstance());
 		}
 
 		if(sdk == null)
