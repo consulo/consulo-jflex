@@ -14,13 +14,13 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ArrayUtil;
-import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsChangeProvider;
-import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsParameters;
 import org.intellij.lang.jflex.fileTypes.JFlexFileType;
 import org.intellij.lang.jflex.psi.JFlexElement;
 import org.intellij.lang.jflex.psi.JFlexPsiFile;
 import org.jetbrains.annotations.NotNull;
 import org.mustbe.consulo.java.module.extension.JavaModuleExtension;
+import org.mustbe.consulo.vfs.backgroundTask.BackgroundTaskByVfsChangeProvider;
+import org.mustbe.consulo.vfs.backgroundTask.BackgroundTaskByVfsParameters;
 
 import java.util.ArrayList;
 import java.util.List;
