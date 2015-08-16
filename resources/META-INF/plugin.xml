@@ -3,11 +3,11 @@
 	<version>SNAPSHOT</version>
 	<category>Grammar Languages</category>
 	<vendor>Alexey Efimov, Max Ishchenko, Jan Dolecek</vendor>
-	<description>Enables JFlex support in IntelliJ IDEA.</description>
 	<resource-bundle>org.intellij.lang.jflex.util.JFlexBundle</resource-bundle>
 	<depends>org.consulo.java</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
+		<errorHandler implementation="com.intellij.diagnostic.ITNReporter" />
 		<projectConfigurable displayName="JFlex" instance="org.intellij.lang.jflex.options.JFlexConfigurable"/>
 
 		<colorSettingsPage implementation="org.intellij.lang.jflex.editor.colors.JFlexColorPage"/>
