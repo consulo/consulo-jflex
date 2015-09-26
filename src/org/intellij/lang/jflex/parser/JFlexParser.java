@@ -20,9 +20,8 @@ public class JFlexParser implements PsiParser
 {
 	@NotNull
 	@Override
-	public ASTNode parse(IElementType root, PsiBuilder builder, LanguageVersion languageVersion)
+	public ASTNode parse(@NotNull IElementType root, @NotNull PsiBuilder builder, @NotNull LanguageVersion languageVersion)
 	{
-
 		final PsiBuilder.Marker rootMarker = builder.mark();
 
 		while(!builder.eof())
@@ -32,7 +31,6 @@ public class JFlexParser implements PsiParser
 		rootMarker.done(root);
 
 		return builder.getTreeBuilt();
-
 	}
 
 	private void parse(PsiBuilder builder)
