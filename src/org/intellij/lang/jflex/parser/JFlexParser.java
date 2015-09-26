@@ -168,7 +168,8 @@ public class JFlexParser implements PsiParser
 		while(JFlexElementTypes.REGEXP_SCOPE.contains(builder.getTokenType()))
 		{
 			found++;
-			builder.advanceLexer();
+
+			parse(builder);
 		}
 
 		if(found == 0)
