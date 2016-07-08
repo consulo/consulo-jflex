@@ -16,171 +16,225 @@ import com.intellij.psi.tree.IElementType;
  * @author Alexey Efimov, Max Ishchenko
  */
 @Logger
-public class JFlexParser implements PsiParser {
-    @NotNull
+public class JFlexParser implements PsiParser
+{
+	@NotNull
 	@Override
-    public ASTNode parse(IElementType root, PsiBuilder builder, LanguageVersion languageVersion) {
+	public ASTNode parse(@NotNull IElementType root, @NotNull PsiBuilder builder, @NotNull LanguageVersion languageVersion)
+	{
+		final PsiBuilder.Marker rootMarker = builder.mark();
 
-        final PsiBuilder.Marker rootMarker = builder.mark();
+		while(!builder.eof())
+		{
+			parse(builder);
+		}
+		rootMarker.done(root);
 
-        while (!builder.eof()) {
-            parse(builder);
-        }
-        rootMarker.done(root);
+		return builder.getTreeBuilt();
+	}
 
-        return builder.getTreeBuilt();
+	private void parse(PsiBuilder builder)
+	{
+		IElementType first = builder.getTokenType();
+		if(first == JFlexElementTypes.MACROS)
+		{
+			parseMacroDefinition(builder);
+		}
+		else if(first == JFlexElementTypes.CLASS_KEYWORD)
+		{
+			parseClassStatement(builder);
+		}
+		else if(first == JFlexElementTypes.STATE_KEYWORD)
+		{
+			parseStateStatement(builder);
+		}
+		else if(first == JFlexElementTypes.XSTATE_KEYWORD)
+		{
+			parseXstateStatement(builder);
+		}
+		else if(first == JFlexElementTypes.STATE_REF)
+		{
+			parseStateReference(builder);
+		}
+		else if(first == JFlexElementTypes.IMPLEMENTS_KEYWORD)
+		{
+			parseImplementsStatement(builder);
+		}
+		else if(first == JFlexElementTypes.TYPE_KEYWORD)
+		{
+			parseTypeStatement(builder);
+		}
+		else if(first == JFlexElementTypes.JAVA_CODE)
+		{
+			parseJavaCode(builder);
+		}
+		else if(first == JFlexElementTypes.REGEXP_MACROS_REF)
+		{
+			parseMacroReference(builder);
+		}
+		else
+		{
+			builder.advanceLexer();
+		}
+	}
 
-    }
+	private void parseStateReference(PsiBuilder builder)
+	{
+		PsiBuilder.Marker mark = builder.mark();
+		builder.advanceLexer();
+		mark.done(JFlexElementTypes.STATE_REF);
+	}
 
-    private void parse(PsiBuilder builder) {
-        IElementType first = builder.getTokenType();
-        if (first == JFlexElementTypes.MACROS) {
-            parseMacroDefinition(builder);
-        } else if (first == JFlexElementTypes.CLASS_KEYWORD) {
-            parseClassStatement(builder);
-        } else if (first == JFlexElementTypes.STATE_KEYWORD) {
-            parseStateStatement(builder);
-        } else if (first == JFlexElementTypes.XSTATE_KEYWORD) {
-            parseXstateStatement(builder);
-        } else if (first == JFlexElementTypes.STATE_REF) {
-            parseStateReference(builder);
-        } else if (first == JFlexElementTypes.IMPLEMENTS_KEYWORD) {
-            parseImplementsStatement(builder);
-        } else if (first == JFlexElementTypes.TYPE_KEYWORD) {
-            parseTypeStatement(builder);
-        } else if (first == JFlexElementTypes.JAVA_CODE) {
-            parseJavaCode(builder);
-        } else if (first == JFlexElementTypes.REGEXP_MACROS_REF) {
-            parseMacroReference(builder);
-        } else {
-            builder.advanceLexer();
-        }
-    }
+	private void parseCommaSeparatedOptionStatement(PsiBuilder builder, IElementType finishWith)
+	{
+		parseCommaSeparatedOptionStatement(builder, finishWith, JFlexElementTypes.OPTION_PARAMETER);
+	}
 
-    private void parseStateReference(PsiBuilder builder) {
-        PsiBuilder.Marker mark = builder.mark();
-        builder.advanceLexer();
-        mark.done(JFlexElementTypes.STATE_REF);
-    }
+	private void parseCommaSeparatedOptionStatement(PsiBuilder builder, IElementType finishWith, IElementType markWith)
+	{
 
-    private void parseCommaSeparatedOptionStatement(PsiBuilder builder, IElementType finishWith) {
-        parseCommaSeparatedOptionStatement(builder, finishWith, JFlexElementTypes.OPTION_PARAMETER);
-    }
+		PsiBuilder.Marker stateMarker = builder.mark();
+		builder.advanceLexer();
 
-    private void parseCommaSeparatedOptionStatement(PsiBuilder builder, IElementType finishWith, IElementType markWith) {
+		boolean first = true;
 
-        PsiBuilder.Marker stateMarker = builder.mark();
-        builder.advanceLexer();
+		while(builder.getTokenType() == JFlexElementTypes.OPTION_PARAMETER || builder.getTokenType() == JFlexElementTypes.OPTION_COMMA)
+		{
 
-        boolean first = true;
+			if(first)
+			{
+				first = false;
+			}
+			else
+			{
+				//parsing commas or go to next expr
+				if(builder.getTokenType() == JFlexElementTypes.OPTION_COMMA)
+				{
+					builder.advanceLexer();
+				}
+				else
+				{
+					builder.error(JFlexBundle.message("parser.comma.expected"));
+				}
+			}
 
-        while (builder.getTokenType() == JFlexElementTypes.OPTION_PARAMETER || builder.getTokenType() == JFlexElementTypes.OPTION_COMMA) {
+			PsiBuilder.Marker interfaceMarker = builder.mark();
+			if(builder.getTokenType() == JFlexElementTypes.OPTION_PARAMETER)
+			{
+				builder.advanceLexer();
+				interfaceMarker.done(markWith);
+			}
+			else
+			{
+				builder.error(JFlexBundle.message("parser.expression.expected"));
+				interfaceMarker.drop();
+				break;
+			}
+		}
 
-            if (first) {
-                first = false;
-            } else {
-                //parsing commas or go to next expr
-                if (builder.getTokenType() == JFlexElementTypes.OPTION_COMMA) {
-                    builder.advanceLexer();
-                } else {
-                    builder.error(JFlexBundle.message("parser.comma.expected"));
-                }
-            }
+		stateMarker.done(finishWith);
 
-            PsiBuilder.Marker interfaceMarker = builder.mark();
-            if (builder.getTokenType() == JFlexElementTypes.OPTION_PARAMETER) {
-                builder.advanceLexer();
-                interfaceMarker.done(markWith);
-            } else {
-                builder.error(JFlexBundle.message("parser.expression.expected"));
-                interfaceMarker.drop();
-                break;
-            }
-        }
+	}
 
-        stateMarker.done(finishWith);
+	private void parseStateStatement(PsiBuilder builder)
+	{
+		parseCommaSeparatedOptionStatement(builder, JFlexElementTypes.STATE_STATEMENT, JFlexElementTypes.STATE_DEFINITION);
 
-    }
+	}
 
-    private void parseStateStatement(PsiBuilder builder) {
-        parseCommaSeparatedOptionStatement(builder, JFlexElementTypes.STATE_STATEMENT, JFlexElementTypes.STATE_DEFINITION);
+	private void parseXstateStatement(PsiBuilder builder)
+	{
+		parseCommaSeparatedOptionStatement(builder, JFlexElementTypes.STATE_STATEMENT, JFlexElementTypes.STATE_DEFINITION);
+	}
 
-    }
+	private void parseMacroDefinition(PsiBuilder builder)
+	{
 
-    private void parseXstateStatement(PsiBuilder builder) {
-        parseCommaSeparatedOptionStatement(builder, JFlexElementTypes.STATE_STATEMENT, JFlexElementTypes.STATE_DEFINITION);
-    }
+		PsiBuilder.Marker macroDefinition = builder.mark();
+		builder.advanceLexer();
 
-    private void parseMacroDefinition(PsiBuilder builder) {
+		if(builder.getTokenType() != JFlexElementTypes.EQ)
+		{
+			builder.error(JFlexBundle.message("parser.eq.expected"));
+		}
+		else
+		{
+			builder.advanceLexer();
+		}
 
-        PsiBuilder.Marker macroDefinition = builder.mark();
-        builder.advanceLexer();
+		int found = 0;
+		PsiBuilder.Marker macrovalue = builder.mark();
 
-        if (builder.getTokenType() != JFlexElementTypes.EQ) {
-            builder.error(JFlexBundle.message("parser.eq.expected"));
-        } else {
-            builder.advanceLexer();
-        }
+		while(JFlexElementTypes.REGEXP_SCOPE.contains(builder.getTokenType()))
+		{
+			found++;
 
-        int found = 0;
-        PsiBuilder.Marker macrovalue = builder.mark();
+			parse(builder);
+		}
 
-        while (JFlexElementTypes.REGEXP_SCOPE.contains(builder.getTokenType())) {
-            found++;
-            builder.advanceLexer();
-        }
+		if(found == 0)
+		{
+			macrovalue.drop();
+			builder.error(JFlexBundle.message("parser.macrovalue.expected"));
+		}
+		else
+		{
+			macrovalue.done(JFlexElementTypes.REGEXP);
+		}
 
-        if (found == 0) {
-            macrovalue.drop();
-            builder.error(JFlexBundle.message("parser.macrovalue.expected"));
-        } else {
-            macrovalue.done(JFlexElementTypes.REGEXP);
-        }
+		macroDefinition.done(JFlexElementTypes.MACRO_DEFINITION);
 
-        macroDefinition.done(JFlexElementTypes.MACRO_DEFINITION);
+	}
 
-    }
+	private void parseMacroReference(PsiBuilder builder)
+	{
+		PsiBuilder.Marker macroMarker = builder.mark();
+		builder.advanceLexer();
+		macroMarker.done(JFlexElementTypes.REGEXP_MACROS_REF);
+	}
 
-    private void parseMacroReference(PsiBuilder builder) {
-        PsiBuilder.Marker macroMarker = builder.mark();
-        builder.advanceLexer();
-        macroMarker.done(JFlexElementTypes.REGEXP_MACROS_REF);
-    }
+	private void parseImplementsStatement(PsiBuilder builder)
+	{
+		parseCommaSeparatedOptionStatement(builder, JFlexElementTypes.IMPLEMENTS_STATEMENT);
+	}
 
-    private void parseImplementsStatement(PsiBuilder builder) {
-        parseCommaSeparatedOptionStatement(builder, JFlexElementTypes.IMPLEMENTS_STATEMENT);
-    }
-
-    private void parseTypeStatement(PsiBuilder builder) {
+	private void parseTypeStatement(PsiBuilder builder)
+	{
 		LOGGER.assertTrue(builder.getTokenType() == JFlexElementTypes.TYPE_KEYWORD);
-        PsiBuilder.Marker marker = builder.mark();
-        builder.advanceLexer();
-        parseOptionParamExpression(builder);
-        marker.done(JFlexElementTypes.TYPE_STATEMENT);
-    }
+		PsiBuilder.Marker marker = builder.mark();
+		builder.advanceLexer();
+		parseOptionParamExpression(builder);
+		marker.done(JFlexElementTypes.TYPE_STATEMENT);
+	}
 
-    private void parseJavaCode(PsiBuilder builder) {
-        PsiBuilder.Marker marker = builder.mark();
-        builder.advanceLexer();
-        marker.done(JFlexElementTypes.JAVA_CODE);
-    }
+	private void parseJavaCode(PsiBuilder builder)
+	{
+		PsiBuilder.Marker marker = builder.mark();
+		builder.advanceLexer();
+		marker.done(JFlexElementTypes.JAVA_CODE);
+	}
 
-    private void parseClassStatement(PsiBuilder builder) {
-        LOGGER.assertTrue(builder.getTokenType() == JFlexElementTypes.CLASS_KEYWORD);
-        PsiBuilder.Marker marker = builder.mark();
-        builder.advanceLexer();
-        parseOptionParamExpression(builder);
-        marker.done(JFlexElementTypes.CLASS_STATEMENT);
-    }
+	private void parseClassStatement(PsiBuilder builder)
+	{
+		LOGGER.assertTrue(builder.getTokenType() == JFlexElementTypes.CLASS_KEYWORD);
+		PsiBuilder.Marker marker = builder.mark();
+		builder.advanceLexer();
+		parseOptionParamExpression(builder);
+		marker.done(JFlexElementTypes.CLASS_STATEMENT);
+	}
 
-    private void parseOptionParamExpression(PsiBuilder builder) {
-        PsiBuilder.Marker expr = builder.mark();
-        if (builder.getTokenType() != JFlexElementTypes.OPTION_PARAMETER) {
-            builder.error(JFlexBundle.message("parser.expression.expected"));
-            expr.drop();
-        } else {
-            builder.advanceLexer();
-            expr.done(JFlexElementTypes.OPTION_PARAMETER);
-        }
-    }
+	private void parseOptionParamExpression(PsiBuilder builder)
+	{
+		PsiBuilder.Marker expr = builder.mark();
+		if(builder.getTokenType() != JFlexElementTypes.OPTION_PARAMETER)
+		{
+			builder.error(JFlexBundle.message("parser.expression.expected"));
+			expr.drop();
+		}
+		else
+		{
+			builder.advanceLexer();
+			expr.done(JFlexElementTypes.OPTION_PARAMETER);
+		}
+	}
 }
