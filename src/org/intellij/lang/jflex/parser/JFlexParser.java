@@ -1,6 +1,6 @@
 package org.intellij.lang.jflex.parser;
 
-import org.consulo.lombok.annotations.Logger;
+import consulo.lombok.annotations.Logger;
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.util.JFlexBundle;
 import org.jetbrains.annotations.NotNull;
