@@ -1,4 +1,5 @@
-<idea-plugin version="2">
+<idea-plugin>
+	<id>consulo.jflex</id>
 	<name>JFlex Support</name>
 	<version>SNAPSHOT</version>
 	<category>Grammar Languages</category>
