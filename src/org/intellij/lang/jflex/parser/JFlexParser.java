@@ -1,14 +1,14 @@
 package org.intellij.lang.jflex.parser;
 
-import consulo.lombok.annotations.Logger;
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.util.JFlexBundle;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
+import consulo.lang.LanguageVersion;
+import consulo.lombok.annotations.Logger;
 
 /**
  * Parser.

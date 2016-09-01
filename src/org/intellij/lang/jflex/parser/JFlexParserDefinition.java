@@ -1,20 +1,23 @@
 package org.intellij.lang.jflex.parser;
 
-import com.intellij.lang.*;
+import org.intellij.lang.jflex.JFlexElementTypes;
+import org.intellij.lang.jflex.JFlexLanguage;
+import org.intellij.lang.jflex.lexer.JFlexParsingLexer;
+import org.intellij.lang.jflex.psi.impl.*;
+import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageUtil;
+import com.intellij.lang.ParserDefinition;
+import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.util.LanguageVersionUtil;
-import org.intellij.lang.jflex.JFlexElementTypes;
-import org.intellij.lang.jflex.JFlexLanguage;
-import org.intellij.lang.jflex.lexer.JFlexParsingLexer;
-import org.intellij.lang.jflex.psi.impl.*;
-import org.jetbrains.annotations.NotNull;
+import consulo.lang.LanguageVersion;
+import consulo.lang.util.LanguageVersionUtil;
 
 /**
  * JFlex parser.
@@ -24,13 +27,13 @@ import org.jetbrains.annotations.NotNull;
 public class JFlexParserDefinition implements ParserDefinition
 {
 	@NotNull
-	public Lexer createLexer(Project project, @NotNull LanguageVersion languageVersion)
+	public Lexer createLexer(@NotNull LanguageVersion languageVersion)
 	{
 		return new JFlexParsingLexer();
 	}
 
 	@NotNull
-	public PsiParser createParser(Project project, @NotNull LanguageVersion languageVersion)
+	public PsiParser createParser(@NotNull LanguageVersion languageVersion)
 	{
 		return new JFlexParser();
 	}
@@ -111,7 +114,7 @@ public class JFlexParserDefinition implements ParserDefinition
 
 	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
 	{
-		final Lexer lexer = createLexer(null, LanguageVersionUtil.findDefaultVersion(JFlexLanguage.INSTANCE));
+		final Lexer lexer = createLexer(LanguageVersionUtil.findDefaultVersion(JFlexLanguage.INSTANCE));
 		return LanguageUtil.canStickTokensTogetherByLexer(left, right, lexer);
 	}
 

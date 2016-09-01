@@ -8,7 +8,6 @@
 	<depends>org.consulo.java</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<errorHandler implementation="com.intellij.diagnostic.ITNReporter" />
 		<projectConfigurable displayName="JFlex" instance="org.intellij.lang.jflex.options.JFlexConfigurable"/>
 
 		<colorSettingsPage implementation="org.intellij.lang.jflex.editor.colors.JFlexColorPage"/>
@@ -19,7 +18,8 @@
 		<annotator language="JFLEX" implementationClass="org.intellij.lang.jflex.validation.JFlexAnnotatingVisitor"/>
 		<languageInjector implementation="org.intellij.lang.jflex.injection.JFlexJavaInjector"/>
 		<fileTypeFactory implementation="org.intellij.lang.jflex.fileTypes.JFlexFileTypeFactory"/>
-		<taskByVfsChange implementation="org.intellij.lang.jflex.vfs.backgroundTask.JFlexBackgroundTaskByVfsChangeProvider"/>
 		<projectService serviceInterface="org.intellij.lang.jflex.options.JFlexSettings" serviceImplementation="org.intellij.lang.jflex.options.JFlexSettings"/>
+
+		<taskByVfsChange implementation="consulo.jflex.vfs.backgroundTask.JFlexBackgroundTaskByVfsChangeProvider"/>
 	</extensions>
 </idea-plugin>

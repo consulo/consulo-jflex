@@ -1,4 +1,4 @@
-package org.intellij.lang.jflex.vfs.backgroundTask;
+package consulo.jflex.vfs.backgroundTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,6 @@ import org.intellij.lang.jflex.psi.JFlexElement;
 import org.intellij.lang.jflex.psi.JFlexPsiFile;
 import org.jetbrains.annotations.NotNull;
 import org.mustbe.consulo.java.module.extension.JavaModuleExtension;
-import org.mustbe.consulo.vfs.backgroundTask.BackgroundTaskByVfsChangeProvider;
-import org.mustbe.consulo.vfs.backgroundTask.BackgroundTaskByVfsParameters;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.ide.highlighter.JavaFileType;
 import com.intellij.openapi.module.Module;
@@ -24,6 +22,8 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ArrayUtil;
+import consulo.backgroundTaskByVfsChange.BackgroundTaskByVfsChangeProvider;
+import consulo.backgroundTaskByVfsChange.BackgroundTaskByVfsParameters;
 
 /**
  * @author VISTALL
