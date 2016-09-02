@@ -1,1 +1,1 @@
-![Build Status](http://must-be.org/vulcan/statusImage?name=consulo-jflex)
+[![Build Status](http://must-be.org/jenkins/job/consulo-jflex/badge/icon)](http://must-be.org/jenkins/job/consulo-jflex/)
