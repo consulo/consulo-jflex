@@ -1,9 +1,9 @@
 package org.intellij.lang.jflex.injection;
 
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.LiteralTextEscaper;
 import org.intellij.lang.jflex.psi.JFlexJavaCode;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.LiteralTextEscaper;
 
 /**
  * Created by IntelliJ IDEA.

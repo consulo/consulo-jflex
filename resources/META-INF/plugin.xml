@@ -8,15 +8,12 @@
 	<depends>consulo.java</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<projectConfigurable displayName="JFlex" instance="org.intellij.lang.jflex.options.JFlexConfigurable"/>
-
 		<colorSettingsPage implementation="org.intellij.lang.jflex.editor.colors.JFlexColorPage"/>
 		<lang.parserDefinition language="JFLEX" implementationClass="org.intellij.lang.jflex.parser.JFlexParserDefinition"/>
 		<lang.documentationProvider language="JFLEX" implementationClass="org.intellij.lang.jflex.JFlexDocumentationProvider"/>
 		<lang.findUsagesProvider language="JFLEX" implementationClass="org.intellij.lang.jflex.JFlexFindUsagesProvider"/>
 		<lang.commenter language="JFLEX" implementationClass="org.intellij.lang.jflex.JFlexCommenter"/>
 		<annotator language="JFLEX" implementationClass="org.intellij.lang.jflex.validation.JFlexAnnotatingVisitor"/>
-		<languageInjector implementation="org.intellij.lang.jflex.injection.JFlexJavaInjector"/>
 		<fileTypeFactory implementation="org.intellij.lang.jflex.fileTypes.JFlexFileTypeFactory"/>
 		<projectService serviceInterface="org.intellij.lang.jflex.options.JFlexSettings" serviceImplementation="org.intellij.lang.jflex.options.JFlexSettings"/>
 
