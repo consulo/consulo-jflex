@@ -5,7 +5,7 @@
 	<category>Grammar Languages</category>
 	<vendor>Alexey Efimov, Max Ishchenko, Jan Dolecek</vendor>
 	<resource-bundle>org.intellij.lang.jflex.util.JFlexBundle</resource-bundle>
-	<depends>org.consulo.java</depends>
+	<depends>consulo.java</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<projectConfigurable displayName="JFlex" instance="org.intellij.lang.jflex.options.JFlexConfigurable"/>

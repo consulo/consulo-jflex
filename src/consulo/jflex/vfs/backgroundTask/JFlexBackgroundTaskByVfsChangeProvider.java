@@ -7,7 +7,6 @@ import org.intellij.lang.jflex.fileTypes.JFlexFileType;
 import org.intellij.lang.jflex.psi.JFlexElement;
 import org.intellij.lang.jflex.psi.JFlexPsiFile;
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.java.module.extension.JavaModuleExtension;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.ide.highlighter.JavaFileType;
 import com.intellij.openapi.module.Module;
@@ -24,6 +23,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.util.ArrayUtil;
 import consulo.backgroundTaskByVfsChange.BackgroundTaskByVfsChangeProvider;
 import consulo.backgroundTaskByVfsChange.BackgroundTaskByVfsParameters;
+import consulo.java.module.extension.JavaModuleExtension;
 
 /**
  * @author VISTALL
