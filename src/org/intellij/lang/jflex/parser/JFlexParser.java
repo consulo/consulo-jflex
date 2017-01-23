@@ -6,18 +6,19 @@ import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.tree.IElementType;
 import consulo.lang.LanguageVersion;
-import consulo.lombok.annotations.Logger;
 
 /**
  * Parser.
  *
  * @author Alexey Efimov, Max Ishchenko
  */
-@Logger
 public class JFlexParser implements PsiParser
 {
+	private static final Logger LOGGER = Logger.getInstance(JFlexParser.class);
+
 	@NotNull
 	@Override
 	public ASTNode parse(@NotNull IElementType root, @NotNull PsiBuilder builder, @NotNull LanguageVersion languageVersion)
