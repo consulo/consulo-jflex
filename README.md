@@ -1,1 +1,1 @@
-[![Build Status](http://must-be.org/jenkins/job/consulo-jflex/badge/icon)](http://must-be.org/jenkins/job/consulo-jflex/)
+[![Build Status](https://ci.consulo.io/job/consulo-jflex/badge/icon)](https://ci.consulo.io/job/consulo-jflex/)
