@@ -91,9 +91,4 @@ final class JFlexColorPage implements ColorSettingsPage {
         Language jflexLanguage = JFlexLanguage.INSTANCE;
         return SyntaxHighlighterFactory.getSyntaxHighlighter(jflexLanguage, null, null);
     }
-
-    @Nullable
-    public Icon getIcon() {
-        return JFlexFileType.INSTANCE.getIcon();
-    }
 }
