@@ -3,10 +3,11 @@ package consulo.jflex.vfs.backgroundTask;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.lang.jflex.fileTypes.JFlexFileType;
 import org.intellij.lang.jflex.psi.JFlexElement;
 import org.intellij.lang.jflex.psi.JFlexPsiFile;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.ide.highlighter.JavaFileType;
 import com.intellij.openapi.module.Module;
@@ -37,7 +38,7 @@ public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsC
 	}
 
 	@Override
-	public void setDefaultParameters(@NotNull Project project, @NotNull VirtualFile virtualFile, @NotNull BackgroundTaskByVfsParameters
+	public void setDefaultParameters(@Nonnull Project project, @Nonnull VirtualFile virtualFile, @Nonnull BackgroundTaskByVfsParameters
 			backgroundTaskByVfsParameters)
 	{
 		Sdk sdk = null;
@@ -79,16 +80,16 @@ public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsC
 		backgroundTaskByVfsParameters.setOutPath("$FileParentPath$");
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getTemplateName()
 	{
 		return "JFlex";
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	public String[] getGeneratedFiles(@NotNull PsiFile psiFile)
+	public String[] getGeneratedFiles(@Nonnull PsiFile psiFile)
 	{
 		if(!(psiFile instanceof JFlexPsiFile))
 		{

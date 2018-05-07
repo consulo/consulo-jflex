@@ -2,7 +2,7 @@ package org.intellij.lang.jflex.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import org.intellij.lang.jflex.psi.JFlexClassStatement;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Implementation of JFlex class statement.
@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class JFlexClassStatementImpl extends JFlexOptionStatementBase implements JFlexClassStatement {
 
-    public JFlexClassStatementImpl(@NotNull ASTNode node) {
+    public JFlexClassStatementImpl(@Nonnull ASTNode node) {
         super(node);
     }
 

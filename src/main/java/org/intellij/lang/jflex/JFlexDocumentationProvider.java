@@ -3,7 +3,7 @@ package org.intellij.lang.jflex;
 import java.util.List;
 
 import org.intellij.lang.jflex.psi.JFlexMacroDefinition;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.psi.PsiElement;

@@ -2,7 +2,7 @@ package org.intellij.lang.jflex.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import org.intellij.lang.jflex.psi.JFlexSection;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class JFlexSectionImpl extends JFlexElementImpl implements JFlexSection {
 
-    public JFlexSectionImpl(@NotNull ASTNode node) {
+    public JFlexSectionImpl(@Nonnull ASTNode node) {
         super(node);
     }
 

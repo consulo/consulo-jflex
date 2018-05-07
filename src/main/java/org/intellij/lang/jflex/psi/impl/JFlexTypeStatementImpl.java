@@ -2,7 +2,7 @@ package org.intellij.lang.jflex.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import org.intellij.lang.jflex.psi.JFlexTypeStatement;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class JFlexTypeStatementImpl extends JFlexOptionStatementBase implements JFlexTypeStatement {
 
-    public JFlexTypeStatementImpl(@NotNull ASTNode node) {
+    public JFlexTypeStatementImpl(@Nonnull ASTNode node) {
         super(node);
     }
 

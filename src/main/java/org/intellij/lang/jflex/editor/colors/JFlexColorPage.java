@@ -11,8 +11,8 @@ import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.editor.JFlexHighlighterColors;
 import org.intellij.lang.jflex.fileTypes.JFlexFileType;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.HashSet;
@@ -53,18 +53,18 @@ final class JFlexColorPage implements ColorSettingsPage {
         return null;
     }
 
-    @NotNull
+    @Nonnull
     public AttributesDescriptor[] getAttributeDescriptors() {
         return attributeDescriptors.toArray(EMPTY_ATTRIBUTES_DESCRIPTOR_ARRAY);
     }
 
-    @NotNull
+    @Nonnull
     public ColorDescriptor[] getColorDescriptors() {
         return EMPTY_COLOR_DESCRIPTOR_ARRAY;
     }
 
     @NonNls
-    @NotNull
+    @Nonnull
     public String getDemoText() {
         return "package org.intellij.lang.jflex;\n" +
                 "%%\n" +
@@ -81,12 +81,12 @@ final class JFlexColorPage implements ColorSettingsPage {
                 "}";
     }
 
-    @NotNull
+    @Nonnull
     public String getDisplayName() {
         return "JFlex";
     }
 
-    @NotNull
+    @Nonnull
     public SyntaxHighlighter getHighlighter() {
         Language jflexLanguage = JFlexLanguage.INSTANCE;
         return SyntaxHighlighterFactory.getSyntaxHighlighter(jflexLanguage, null, null);

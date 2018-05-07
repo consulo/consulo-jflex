@@ -2,11 +2,13 @@ package org.intellij.lang.jflex.psi.impl;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.injection.EmbeddedJavaLiteralTextEscaper;
 import org.intellij.lang.jflex.psi.JFlexJavaCode;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.util.Pair;
@@ -24,7 +26,7 @@ import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
  */
 public class JFlexJavaCodeImpl extends JFlexElementImpl implements JFlexJavaCode {
 
-    public JFlexJavaCodeImpl(@NotNull ASTNode node) {
+    public JFlexJavaCodeImpl(@Nonnull ASTNode node) {
         super(node);
     }
 
@@ -44,18 +46,18 @@ public class JFlexJavaCodeImpl extends JFlexElementImpl implements JFlexJavaCode
         return InjectedLanguageManager.getInstance(getProject()).getInjectedPsiFiles(this);
     }
 
-    public void processInjectedPsi(@NotNull InjectedPsiVisitor visitor) {
+    public void processInjectedPsi(@Nonnull InjectedPsiVisitor visitor) {
         InjectedLanguageUtil.enumerate(this, visitor);
     }
 
-    public PsiLanguageInjectionHost updateText(@NotNull String text) {
+    public PsiLanguageInjectionHost updateText(@Nonnull String text) {
         return this;
     }
 
-    public void fixText(@NotNull String text) {
+    public void fixText(@Nonnull String text) {
     }
 
-    @NotNull
+    @Nonnull
     public LiteralTextEscaper<JFlexJavaCode> createLiteralTextEscaper() {
         return new EmbeddedJavaLiteralTextEscaper(this);
     }

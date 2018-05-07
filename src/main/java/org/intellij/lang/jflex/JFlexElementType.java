@@ -2,19 +2,19 @@ package org.intellij.lang.jflex;
 
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.text.MessageFormat;
 
 public class JFlexElementType extends IElementType {
     private final IElementType parsedType;
 
-    public JFlexElementType(@NotNull @NonNls String debugName, IElementType parsedType) {
+    public JFlexElementType(@Nonnull @NonNls String debugName, IElementType parsedType) {
         super(debugName, JFlexLanguage.INSTANCE);
         this.parsedType = parsedType;
     }
 
-    public JFlexElementType(@NotNull @NonNls String debugName) {
+    public JFlexElementType(@Nonnull @NonNls String debugName) {
         this(debugName, null);
     }
 

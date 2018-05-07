@@ -1,12 +1,13 @@
 package org.intellij.lang.jflex.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.psi.JFlexMacroDefinition;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class JFlexMacroDefinitionImpl extends JFlexElementImpl implements JFlexMacroDefinition {
 
-    public JFlexMacroDefinitionImpl(@NotNull ASTNode node) {
+    public JFlexMacroDefinitionImpl(@Nonnull ASTNode node) {
         super(node);
     }
 
@@ -34,7 +35,7 @@ public class JFlexMacroDefinitionImpl extends JFlexElementImpl implements JFlexM
         return node != null ? node.getText() : null;
     }
 
-    public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+    public PsiElement setName(@NonNls @Nonnull String name) throws IncorrectOperationException {
         throw new IncorrectOperationException();
     }
 

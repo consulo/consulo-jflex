@@ -5,7 +5,7 @@ import com.intellij.psi.tree.TokenSet;
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.psi.JFlexStateDefinition;
 import org.intellij.lang.jflex.psi.JFlexStateStatement;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,7 +17,7 @@ public class JFlexStateStatementImpl extends JFlexElementImpl implements JFlexSt
 
     public static final TokenSet STATEDEF = TokenSet.create(JFlexElementTypes.STATE_DEFINITION);
 
-    public JFlexStateStatementImpl(@NotNull ASTNode node) {
+    public JFlexStateStatementImpl(@Nonnull ASTNode node) {
         super(node);
     }
 

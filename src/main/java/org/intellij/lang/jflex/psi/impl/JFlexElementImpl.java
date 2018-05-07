@@ -6,7 +6,7 @@ import com.intellij.lang.Language;
 import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.psi.JFlexElement;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * JFlex base element.
@@ -18,11 +18,11 @@ public class JFlexElementImpl extends ASTWrapperPsiElement implements JFlexEleme
     @NonNls
     private static final String IMPL = "Impl";
 
-    public JFlexElementImpl(@NotNull ASTNode node) {
+    public JFlexElementImpl(@Nonnull ASTNode node) {
         super(node);
     }
 
-    @NotNull
+    @Nonnull
     public Language getLanguage() {
         return JFlexLanguage.INSTANCE;
     }

@@ -3,14 +3,12 @@ package org.intellij.lang.jflex.fileTypes;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.tree.IElementType;
 import org.intellij.lang.jflex.JFlexElementType;
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.editor.JFlexHighlighterColors;
 import org.intellij.lang.jflex.lexer.JFlexHighlighterLexer;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -62,12 +60,12 @@ public final class JFlexSyntaxHighlighter extends SyntaxHighlighterBase {
         colors.put(JFlexElementTypes.SECTION_SIGN, JFlexHighlighterColors.SECTION_SIGN);
     }
 
-    @NotNull
+    @Nonnull
     public Lexer getHighlightingLexer() {
         return lexer;
     }
 
-    @NotNull
+    @Nonnull
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
         return pack(getAttributeKeys(tokenType, backgrounds), getAttributeKeys(tokenType, colors));
     }

@@ -1,7 +1,7 @@
 package org.intellij.lang.jflex;
 
 import com.intellij.lang.Commenter;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

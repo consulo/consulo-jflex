@@ -1,12 +1,13 @@
 package org.intellij.lang.jflex.fileTypes;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
 import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.util.JFlexBundle;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.util.IconLoader;
 
@@ -27,14 +28,14 @@ public final class JFlexFileType extends LanguageFileType
 		super(JFlexLanguage.INSTANCE);
 	}
 
-	@NotNull
+	@Nonnull
 	@NonNls
 	public String getDefaultExtension()
 	{
 		return DEFAULT_EXTENSION;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return JFlexBundle.message("jflex.filetype.description");
@@ -46,7 +47,7 @@ public final class JFlexFileType extends LanguageFileType
 		return IconLoader.getIcon("/fileTypes/jflex.png");
 	}
 
-	@NotNull
+	@Nonnull
 	@NonNls
 	public String getId()
 	{

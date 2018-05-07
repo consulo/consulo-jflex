@@ -1,11 +1,12 @@
 package org.intellij.lang.jflex.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
 import org.intellij.lang.jflex.psi.JFlexStateDefinition;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class JFlexStateDefinitionImpl extends JFlexElementImpl implements JFlexStateDefinition {
 
-    public JFlexStateDefinitionImpl(@NotNull ASTNode node) {
+    public JFlexStateDefinitionImpl(@Nonnull ASTNode node) {
         super(node);
     }
 
@@ -23,7 +24,7 @@ public class JFlexStateDefinitionImpl extends JFlexElementImpl implements JFlexS
         return getText();
     }
 
-    public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+    public PsiElement setName(@NonNls @Nonnull String name) throws IncorrectOperationException {
         throw new IncorrectOperationException();
     }
 

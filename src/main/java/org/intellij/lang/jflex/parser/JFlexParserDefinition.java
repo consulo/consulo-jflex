@@ -1,10 +1,11 @@
 package org.intellij.lang.jflex.parser;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.lexer.JFlexParsingLexer;
 import org.intellij.lang.jflex.psi.impl.*;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageUtil;
 import com.intellij.lang.ParserDefinition;
@@ -26,37 +27,37 @@ import consulo.lang.util.LanguageVersionUtil;
  */
 public class JFlexParserDefinition implements ParserDefinition
 {
-	@NotNull
-	public Lexer createLexer(@NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public Lexer createLexer(@Nonnull LanguageVersion languageVersion)
 	{
 		return new JFlexParsingLexer();
 	}
 
-	@NotNull
-	public PsiParser createParser(@NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public PsiParser createParser(@Nonnull LanguageVersion languageVersion)
 	{
 		return new JFlexParser();
 	}
 
-	@NotNull
+	@Nonnull
 	public IFileElementType getFileNodeType()
 	{
 		return JFlexElementTypes.FILE;
 	}
 
-	@NotNull
-	public TokenSet getWhitespaceTokens(@NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public TokenSet getWhitespaceTokens(@Nonnull LanguageVersion languageVersion)
 	{
 		return JFlexElementTypes.WHITE_SPACES;
 	}
 
-	@NotNull
+	@Nonnull
 	public TokenSet getCommentTokens(LanguageVersion languageVersion)
 	{
 		return JFlexElementTypes.COMMENTS;
 	}
 
-	@NotNull
+	@Nonnull
 	public PsiElement createElement(ASTNode node)
 	{
 		IElementType type = node.getElementType();
@@ -118,7 +119,7 @@ public class JFlexParserDefinition implements ParserDefinition
 		return LanguageUtil.canStickTokensTogetherByLexer(left, right, lexer);
 	}
 
-	@NotNull
+	@Nonnull
 	public TokenSet getStringLiteralElements(LanguageVersion languageVersion)
 	{
 		return JFlexElementTypes.COMMENTS;

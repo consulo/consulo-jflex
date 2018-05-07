@@ -1,5 +1,7 @@
 package org.intellij.lang.jflex.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
@@ -12,8 +14,8 @@ import org.intellij.lang.jflex.psi.JFlexMacroDefinition;
 import org.intellij.lang.jflex.psi.JFlexMacroReference;
 import org.intellij.lang.jflex.psi.JFlexPsiFile;
 import org.intellij.lang.jflex.validation.JFlexAnnotatingVisitor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class JFlexMacroReferenceImpl extends JFlexElementImpl implements JFlexMacroReference {
 
-    public JFlexMacroReferenceImpl(@NotNull ASTNode node) {
+    public JFlexMacroReferenceImpl(@Nonnull ASTNode node) {
         super(node);
     }
 
@@ -31,7 +33,7 @@ public class JFlexMacroReferenceImpl extends JFlexElementImpl implements JFlexMa
         return this;
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof JFlexAnnotatingVisitor) {
             ((JFlexAnnotatingVisitor) visitor).visitMacroReference(this);
         }
@@ -70,7 +72,7 @@ public class JFlexMacroReferenceImpl extends JFlexElementImpl implements JFlexMa
         throw new IncorrectOperationException();
     }
 
-    public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException {
         throw new IncorrectOperationException();
     }
 

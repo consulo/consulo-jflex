@@ -1,11 +1,13 @@
 package org.intellij.lang.jflex.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.psi.JFlexExpression;
 import org.intellij.lang.jflex.psi.JFlexOptionStatement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public abstract class JFlexOptionStatementBase extends JFlexElementImpl implements JFlexOptionStatement {
 
-    public JFlexOptionStatementBase(@NotNull ASTNode node) {
+    public JFlexOptionStatementBase(@Nonnull ASTNode node) {
         super(node);
     }
 

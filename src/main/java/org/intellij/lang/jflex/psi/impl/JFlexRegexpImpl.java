@@ -1,8 +1,9 @@
 package org.intellij.lang.jflex.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import org.intellij.lang.jflex.psi.JFlexRegexp;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class JFlexRegexpImpl extends JFlexElementImpl implements JFlexRegexp {
 
-    public JFlexRegexpImpl(@NotNull ASTNode node) {
+    public JFlexRegexpImpl(@Nonnull ASTNode node) {
         super(node);
     }
 

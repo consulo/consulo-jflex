@@ -9,8 +9,8 @@ import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.fileTypes.JFlexFileType;
 import org.intellij.lang.jflex.psi.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * JFlex PSI file.
@@ -80,7 +80,7 @@ public class JFlexPsiFileImpl extends PsiFileBase implements JFlexPsiFile {
         return result;
     }
 
-    @NotNull
+    @Nonnull
     public FileType getFileType() {
         return JFlexFileType.INSTANCE;
     }

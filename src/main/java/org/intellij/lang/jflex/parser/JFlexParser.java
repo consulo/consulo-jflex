@@ -2,7 +2,7 @@ package org.intellij.lang.jflex.parser;
 
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.util.JFlexBundle;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
@@ -19,9 +19,9 @@ public class JFlexParser implements PsiParser
 {
 	private static final Logger LOGGER = Logger.getInstance(JFlexParser.class);
 
-	@NotNull
+	@Nonnull
 	@Override
-	public ASTNode parse(@NotNull IElementType root, @NotNull PsiBuilder builder, @NotNull LanguageVersion languageVersion)
+	public ASTNode parse(@Nonnull IElementType root, @Nonnull PsiBuilder builder, @Nonnull LanguageVersion languageVersion)
 	{
 		final PsiBuilder.Marker rootMarker = builder.mark();
 

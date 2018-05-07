@@ -1,6 +1,6 @@
 package org.intellij.lang.jflex.psi;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

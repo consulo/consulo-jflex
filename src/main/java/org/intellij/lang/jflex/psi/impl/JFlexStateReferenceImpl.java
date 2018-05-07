@@ -8,8 +8,8 @@ import org.intellij.lang.jflex.psi.JFlexPsiFile;
 import org.intellij.lang.jflex.psi.JFlexStateDefinition;
 import org.intellij.lang.jflex.psi.JFlexStateReference;
 import org.intellij.lang.jflex.psi.JFlexStateStatement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
@@ -24,11 +24,11 @@ import com.intellij.util.IncorrectOperationException;
  */
 public class JFlexStateReferenceImpl extends JFlexElementImpl implements JFlexStateReference {
 
-    public JFlexStateReferenceImpl(@NotNull ASTNode node) {
+    public JFlexStateReferenceImpl(@Nonnull ASTNode node) {
         super(node);
     }
 
-    public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException {
         throw new IncorrectOperationException();
     }
 

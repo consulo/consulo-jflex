@@ -1,7 +1,8 @@
 package org.intellij.lang.jflex.injection;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.lang.jflex.psi.JFlexJavaCode;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.LiteralTextEscaper;
 
@@ -13,16 +14,16 @@ import com.intellij.psi.LiteralTextEscaper;
  */
 public class EmbeddedJavaLiteralTextEscaper extends LiteralTextEscaper<JFlexJavaCode> {
 
-    public EmbeddedJavaLiteralTextEscaper(@NotNull JFlexJavaCode host) {
+    public EmbeddedJavaLiteralTextEscaper(@Nonnull JFlexJavaCode host) {
         super(host);
     }
 
-    public boolean decode(@NotNull TextRange textrange, @NotNull StringBuilder stringbuilder) {
+    public boolean decode(@Nonnull TextRange textrange, @Nonnull StringBuilder stringbuilder) {
         stringbuilder.append(myHost.getText(), textrange.getStartOffset(), textrange.getEndOffset());
         return true;
     }
 
-    public int getOffsetInHost(int i, @NotNull TextRange textrange) {
+    public int getOffsetInHost(int i, @Nonnull TextRange textrange) {
         int j = i + textrange.getStartOffset();
         if (j < textrange.getStartOffset())
             j = textrange.getStartOffset();
