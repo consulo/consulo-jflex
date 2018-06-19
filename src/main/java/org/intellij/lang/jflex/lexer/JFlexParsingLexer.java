@@ -6,5 +6,4 @@ package org.intellij.lang.jflex.lexer;
  * @author Alexey Efimov
  */
 public class JFlexParsingLexer extends JFlexMergingLexer {
-
 }

@@ -1,16 +1,16 @@
 package org.intellij.lang.jflex.lexer;
 
-import com.intellij.lexer.FlexLexer;
+import com.intellij.lexer.LexerBase;
 import com.intellij.psi.tree.IElementType;
 import org.intellij.lang.jflex.JFlexElementTypes;
 
 %%
 
 %class _JFlexLexer
-%implements FlexLexer
+%extends LexerBase
 %final
 %unicode
-%function advance
+%function advanceImpl
 %type IElementType
 %eof{ return;
 %eof}

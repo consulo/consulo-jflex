@@ -6,8 +6,8 @@ import javax.annotation.Nullable;
 import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.util.JFlexBundle;
 import org.jetbrains.annotations.NonNls;
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.intellij.openapi.util.IconLoader;
 import consulo.ui.image.Image;
 
 /**
@@ -43,7 +43,7 @@ public final class JFlexFileType extends LanguageFileType
 	@Nullable
 	public Image getIcon()
 	{
-		return IconLoader.getIcon("/fileTypes/jflex.png");
+		return AllIcons.FileTypes.Text;
 	}
 
 	@Nonnull
