@@ -13,6 +13,7 @@
 		<lang.documentationProvider language="JFLEX" implementationClass="org.intellij.lang.jflex.JFlexDocumentationProvider"/>
 		<lang.findUsagesProvider language="JFLEX" implementationClass="org.intellij.lang.jflex.JFlexFindUsagesProvider"/>
 		<lang.commenter language="JFLEX" implementationClass="org.intellij.lang.jflex.JFlexCommenter"/>
+		<lang.syntaxHighlighterFactory language="JFLEX" implementationClass="org.intellij.lang.jflex.fileTypes.JFlexSyntaxHighlighterFactory" />
 		<annotator language="JFLEX" implementationClass="org.intellij.lang.jflex.validation.JFlexAnnotatingVisitor"/>
 		<fileTypeFactory implementation="org.intellij.lang.jflex.fileTypes.JFlexFileTypeFactory"/>
 		<projectService serviceInterface="org.intellij.lang.jflex.options.JFlexSettings" serviceImplementation="org.intellij.lang.jflex.options.JFlexSettings"/>
