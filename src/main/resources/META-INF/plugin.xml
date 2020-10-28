@@ -1,4 +1,4 @@
-<idea-plugin>
+<consulo-plugin>
 	<id>consulo.jflex</id>
 	<name>JFlex Support</name>
 	<version>SNAPSHOT</version>
@@ -20,4 +20,4 @@
 
 		<taskByVfsChange implementation="consulo.jflex.vfs.backgroundTask.JFlexBackgroundTaskByVfsChangeProvider"/>
 	</extensions>
-</idea-plugin>
+</consulo-plugin>
