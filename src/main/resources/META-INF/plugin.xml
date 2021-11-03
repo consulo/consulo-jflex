@@ -7,6 +7,10 @@
 	<resource-bundle>org.intellij.lang.jflex.util.JFlexBundle</resource-bundle>
 	<depends>consulo.java</depends>
 
+	<tags>
+		<tag>grammar.language</tag>
+	</tags>
+
 	<extensions defaultExtensionNs="com.intellij">
 		<colorSettingsPage implementation="org.intellij.lang.jflex.editor.colors.JFlexColorPage"/>
 		<lang.parserDefinition language="JFLEX" implementationClass="org.intellij.lang.jflex.parser.JFlexParserDefinition"/>
