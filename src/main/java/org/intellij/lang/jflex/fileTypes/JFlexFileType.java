@@ -1,14 +1,14 @@
 package org.intellij.lang.jflex.fileTypes;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.intellij.lang.jflex.JFlexLanguage;
-import org.intellij.lang.jflex.util.JFlexBundle;
-import org.jetbrains.annotations.NonNls;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.localize.LocalizeValue;
+import consulo.localize.localize.JFlexLocalize;
 import consulo.ui.image.Image;
+import org.intellij.lang.jflex.JFlexLanguage;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * JFlex file type.
@@ -19,7 +19,6 @@ public final class JFlexFileType extends LanguageFileType
 {
 	public static final JFlexFileType INSTANCE = new JFlexFileType();
 
-	@NonNls
 	public static final String DEFAULT_EXTENSION = "flex";
 
 	public JFlexFileType()
@@ -28,16 +27,15 @@ public final class JFlexFileType extends LanguageFileType
 	}
 
 	@Nonnull
-	@NonNls
 	public String getDefaultExtension()
 	{
 		return DEFAULT_EXTENSION;
 	}
 
 	@Nonnull
-	public String getDescription()
+	public LocalizeValue getDescription()
 	{
-		return JFlexBundle.message("jflex.filetype.description");
+		return JFlexLocalize.jflexFiletypeDescription();
 	}
 
 	@Nullable
@@ -47,7 +45,6 @@ public final class JFlexFileType extends LanguageFileType
 	}
 
 	@Nonnull
-	@NonNls
 	public String getId()
 	{
 		return "JFlex";

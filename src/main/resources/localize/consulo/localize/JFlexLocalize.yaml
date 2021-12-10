@@ -1,0 +1,46 @@
+jflex.filetype.description:
+  text: JFlex files
+jflex:
+  text: JFlex
+jflex.settings:
+  text: JFlex settings
+enabled.jflex.files.compilation:
+  text: '&Enable JFlex files compilation'
+jflex.compiler.settings:
+  text: JFlex compiler settings
+path.to.jflex:
+  text: '&Path to JFlex:'
+skeleton.file:
+  text: '&Skeleton file:'
+command.line.options:
+  text: 'Command line &options:'
+enabled.embed.java.code.support:
+  text: Embedded &Java code support (turn it off if you feel it's too slow)
+select.jflex.home:
+  text: Select JFlex home
+please.select.jflex.folder:
+  text: Please, select JFlex folder
+select.skeleton.file:
+  text: Select skeleton file
+please.select.jflex.skeleton.file:
+  text: Please, select JFlex skeleton file
+please.enter.path.to.jflex.home.directory:
+  text: Please, enter path to JFlex home directory
+jflex.home.path.is.invalid:
+  text: JFlex home path is invalid
+jflex.skeleton.file.was.not.found:
+  text: JFlex skeleton file was not found
+file.not.generated:
+  text: File not generated
+command.0.execution.failed.with.exit.code.1:
+  text: Command "{0}" execution failed with exit code {1}
+jar.not.found:
+  text: JFlex jar file not found in configured path ("{0}")
+parser.comma.expected:
+  text: Comma expected
+parser.expression.expected:
+  text: Expression expected
+parser.eq.expected:
+  text: '"=" expected'
+parser.macrovalue.expected:
+  text: Macro value expected
