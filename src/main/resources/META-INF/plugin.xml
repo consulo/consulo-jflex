@@ -1,4 +1,4 @@
-<consulo-plugin>
+<consulo-plugin url="https://github.com/consulo/consulo-jflex">
 	<id>consulo.jflex</id>
 	<name>JFlex Support</name>
 	<version>SNAPSHOT</version>
