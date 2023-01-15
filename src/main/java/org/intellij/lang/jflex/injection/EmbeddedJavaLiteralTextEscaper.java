@@ -1,10 +1,10 @@
 package org.intellij.lang.jflex.injection;
 
-import javax.annotation.Nonnull;
-
+import consulo.document.util.TextRange;
+import consulo.language.psi.LiteralTextEscaper;
 import org.intellij.lang.jflex.psi.JFlexJavaCode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.LiteralTextEscaper;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,7 +12,7 @@ import com.intellij.psi.LiteralTextEscaper;
  * Date: 15.03.2008
  * Time: 21:01:02
  */
-public class EmbeddedJavaLiteralTextEscaper extends LiteralTextEscaper<JFlexJavaCode> {
+public class EmbeddedJavaLiteralTextEscaper extends LiteralTextEscaper<JFlexJavaCode>{
 
     public EmbeddedJavaLiteralTextEscaper(@Nonnull JFlexJavaCode host) {
         super(host);

@@ -1,12 +1,11 @@
 package org.intellij.lang.jflex.psi.impl;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.lang.ASTNode;
+import consulo.language.ast.ASTNode;
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.psi.JFlexExpression;
 import org.intellij.lang.jflex.psi.JFlexOptionStatement;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**

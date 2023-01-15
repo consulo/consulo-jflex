@@ -1,20 +1,19 @@
 package org.intellij.lang.jflex.psi.impl;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.searches.ReferencesSearch;
-import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.Query;
+import consulo.application.util.query.Query;
+import consulo.document.util.TextRange;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.PsiReference;
+import consulo.language.psi.search.ReferencesSearch;
+import consulo.language.util.IncorrectOperationException;
 import org.intellij.lang.jflex.psi.JFlexMacroDefinition;
 import org.intellij.lang.jflex.psi.JFlexMacroReference;
 import org.intellij.lang.jflex.psi.JFlexPsiFile;
 import org.intellij.lang.jflex.validation.JFlexAnnotatingVisitor;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**

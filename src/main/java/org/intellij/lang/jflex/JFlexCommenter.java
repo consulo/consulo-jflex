@@ -1,6 +1,10 @@
 package org.intellij.lang.jflex;
 
-import com.intellij.lang.Commenter;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Commenter;
+import consulo.language.Language;
+
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -9,6 +13,7 @@ import javax.annotation.Nullable;
  * Date: 01.04.2008
  * Time: 23:39:04
  */
+@ExtensionImpl
 public class JFlexCommenter implements Commenter {
     @Nullable
     public String getBlockCommentPrefix() {
@@ -31,5 +36,11 @@ public class JFlexCommenter implements Commenter {
 
     public String getCommentedBlockCommentPrefix() {
         return null;
+    }
+
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return JFlexLanguage.INSTANCE;
     }
 }

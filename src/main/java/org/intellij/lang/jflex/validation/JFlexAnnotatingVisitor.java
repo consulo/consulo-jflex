@@ -1,10 +1,10 @@
 package org.intellij.lang.jflex.validation;
 
-import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.lang.annotation.Annotator;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReferenceExpression;
+import com.intellij.java.language.psi.PsiReferenceExpression;
+import consulo.language.editor.annotation.AnnotationHolder;
+import consulo.language.editor.annotation.Annotator;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
 import org.intellij.lang.jflex.psi.JFlexMacroReference;
 
 /**
@@ -25,5 +25,4 @@ public class JFlexAnnotatingVisitor extends PsiElementVisitor implements Annotat
     public void visitMacroReference(JFlexMacroReference expression) {
 
     }
-
 }

@@ -1,6 +1,6 @@
 package org.intellij.lang.jflex.psi;
 
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * Marker.

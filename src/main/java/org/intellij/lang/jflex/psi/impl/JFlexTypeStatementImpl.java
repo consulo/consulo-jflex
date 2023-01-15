@@ -1,7 +1,8 @@
 package org.intellij.lang.jflex.psi.impl;
 
-import com.intellij.lang.ASTNode;
+import consulo.language.ast.ASTNode;
 import org.intellij.lang.jflex.psi.JFlexTypeStatement;
+
 import javax.annotation.Nonnull;
 
 /**

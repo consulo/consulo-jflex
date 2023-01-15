@@ -1,6 +1,6 @@
 package org.intellij.lang.jflex;
 
-import com.intellij.lang.Language;
+import consulo.language.Language;
 
 /**
  * JFlex language.

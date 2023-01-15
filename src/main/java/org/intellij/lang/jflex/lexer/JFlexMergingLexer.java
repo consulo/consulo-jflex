@@ -1,8 +1,8 @@
 package org.intellij.lang.jflex.lexer;
 
+import consulo.language.ast.TokenSet;
+import consulo.language.lexer.MergingLexerAdapter;
 import org.intellij.lang.jflex.JFlexElementTypes;
-import com.intellij.lexer.MergingLexerAdapter;
-import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.

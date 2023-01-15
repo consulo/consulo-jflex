@@ -1,6 +1,6 @@
 package org.intellij.lang.jflex.psi;
 
-import com.intellij.psi.PsiReference;
+import consulo.language.psi.PsiReference;
 
 /**
  * Created by IntelliJ IDEA.

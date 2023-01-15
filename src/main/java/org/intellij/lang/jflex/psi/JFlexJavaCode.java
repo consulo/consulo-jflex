@@ -1,6 +1,6 @@
 package org.intellij.lang.jflex.psi;
 
-import com.intellij.psi.PsiLanguageInjectionHost;
+import consulo.language.psi.PsiLanguageInjectionHost;
 
 /**
  * Created by IntelliJ IDEA.
@@ -9,7 +9,5 @@ import com.intellij.psi.PsiLanguageInjectionHost;
  * Time: 18:52:38
  */
 public interface JFlexJavaCode extends JFlexElement, PsiLanguageInjectionHost {
-
     public boolean isMatchAction();
-
 }

@@ -1,27 +1,25 @@
 package org.intellij.lang.jflex.editor.colors;
 
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
-import com.intellij.openapi.options.colors.AttributesDescriptor;
-import com.intellij.openapi.options.colors.ColorDescriptor;
-import com.intellij.openapi.options.colors.ColorSettingsPage;
-import com.intellij.lang.Language;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.colorScheme.TextAttributesKey;
+import consulo.colorScheme.setting.AttributesDescriptor;
+import consulo.language.Language;
+import consulo.language.editor.colorScheme.setting.ColorSettingsPage;
+import consulo.language.editor.highlight.SyntaxHighlighter;
+import consulo.language.editor.highlight.SyntaxHighlighterFactory;
 import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.editor.JFlexHighlighterColors;
-import org.intellij.lang.jflex.fileTypes.JFlexFileType;
 import org.jetbrains.annotations.NonNls;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import javax.swing.*;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+@ExtensionImpl
 final class JFlexColorPage implements ColorSettingsPage {
     private static final AttributesDescriptor[] EMPTY_ATTRIBUTES_DESCRIPTOR_ARRAY = new AttributesDescriptor[]{};
-    private static final ColorDescriptor[] EMPTY_COLOR_DESCRIPTOR_ARRAY = new ColorDescriptor[]{};
 
     private final Set<AttributesDescriptor> attributeDescriptors = new HashSet<AttributesDescriptor>();
 
@@ -56,11 +54,6 @@ final class JFlexColorPage implements ColorSettingsPage {
     @Nonnull
     public AttributesDescriptor[] getAttributeDescriptors() {
         return attributeDescriptors.toArray(EMPTY_ATTRIBUTES_DESCRIPTOR_ARRAY);
-    }
-
-    @Nonnull
-    public ColorDescriptor[] getColorDescriptors() {
-        return EMPTY_COLOR_DESCRIPTOR_ARRAY;
     }
 
     @NonNls

@@ -1,22 +1,19 @@
 package org.intellij.lang.jflex.psi.impl;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
+import consulo.document.util.TextRange;
+import consulo.language.ast.ASTNode;
+import consulo.language.inject.InjectedLanguageManager;
+import consulo.language.psi.LiteralTextEscaper;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiLanguageInjectionHost;
+import consulo.util.lang.Pair;
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.injection.EmbeddedJavaLiteralTextEscaper;
 import org.intellij.lang.jflex.psi.JFlexJavaCode;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.injection.InjectedLanguageManager;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.LiteralTextEscaper;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiLanguageInjectionHost;
-import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,15 +43,8 @@ public class JFlexJavaCodeImpl extends JFlexElementImpl implements JFlexJavaCode
         return InjectedLanguageManager.getInstance(getProject()).getInjectedPsiFiles(this);
     }
 
-    public void processInjectedPsi(@Nonnull InjectedPsiVisitor visitor) {
-        InjectedLanguageUtil.enumerate(this, visitor);
-    }
-
     public PsiLanguageInjectionHost updateText(@Nonnull String text) {
         return this;
-    }
-
-    public void fixText(@Nonnull String text) {
     }
 
     @Nonnull

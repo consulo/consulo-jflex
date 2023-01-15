@@ -1,10 +1,9 @@
 package org.intellij.lang.jflex;
 
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
 import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
 
-import java.text.MessageFormat;
+import javax.annotation.Nonnull;
 
 public class JFlexElementType extends IElementType {
     private final IElementType parsedType;
@@ -20,10 +19,5 @@ public class JFlexElementType extends IElementType {
 
     public IElementType getParsedType() {
         return parsedType != null ? parsedType : this;
-    }
-
-    @SuppressWarnings({"HardCodedStringLiteral"})
-    public String toString() {
-        return MessageFormat.format("JFlex:{0}", super.toString());
     }
 }

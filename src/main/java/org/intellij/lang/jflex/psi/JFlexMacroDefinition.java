@@ -1,7 +1,7 @@
 package org.intellij.lang.jflex.psi;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiNamedElement;
 
 /**
  * Created by IntelliJ IDEA.

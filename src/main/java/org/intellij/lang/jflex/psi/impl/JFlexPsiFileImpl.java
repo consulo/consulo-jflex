@@ -1,14 +1,15 @@
 package org.intellij.lang.jflex.psi.impl;
 
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.TokenSet;
+import consulo.language.file.FileViewProvider;
+import consulo.language.impl.psi.PsiFileBase;
+import consulo.virtualFileSystem.fileType.FileType;
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.fileTypes.JFlexFileType;
 import org.intellij.lang.jflex.psi.*;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 

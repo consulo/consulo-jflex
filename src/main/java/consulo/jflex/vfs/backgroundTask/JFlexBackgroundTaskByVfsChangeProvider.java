@@ -1,40 +1,46 @@
 package consulo.jflex.vfs.backgroundTask;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
+import com.intellij.java.language.impl.JavaFileType;
+import com.intellij.java.language.projectRoots.JavaSdk;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.util.SystemInfo;
+import consulo.content.bundle.Sdk;
+import consulo.content.bundle.SdkTable;
+import consulo.java.language.module.extension.JavaModuleExtension;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.ModuleUtilCore;
+import consulo.module.Module;
+import consulo.process.cmd.GeneralCommandLine;
+import consulo.project.Project;
+import consulo.util.collection.ArrayUtil;
+import consulo.util.lang.StringUtil;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.fileWatcher.BackgroundTaskByVfsChangeProvider;
+import consulo.virtualFileSystem.fileWatcher.BackgroundTaskByVfsParameters;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import org.intellij.lang.jflex.fileTypes.JFlexFileType;
 import org.intellij.lang.jflex.psi.JFlexElement;
 import org.intellij.lang.jflex.psi.JFlexPsiFile;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.ide.highlighter.JavaFileType;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtilCore;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.JavaSdk;
-import com.intellij.openapi.projectRoots.JavaSdkType;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkTable;
-import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.ArrayUtil;
-import consulo.backgroundTaskByVfsChange.BackgroundTaskByVfsChangeProvider;
-import consulo.backgroundTaskByVfsChange.BackgroundTaskByVfsParameters;
-import consulo.java.module.extension.JavaModuleExtension;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author VISTALL
  * @since 07.10.13.
  */
+@ExtensionImpl
 public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsChangeProvider.ByFileType
 {
-	public JFlexBackgroundTaskByVfsChangeProvider()
+	private final Provider<SdkTable> mySdkTable;
+
+	@Inject
+	public JFlexBackgroundTaskByVfsChangeProvider(Provider<SdkTable> sdkTable)
 	{
 		super(JFlexFileType.INSTANCE);
+		mySdkTable = sdkTable;
 	}
 
 	@Override
@@ -50,20 +56,20 @@ public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsC
 
 		if(sdk == null)
 		{
-			sdk = SdkTable.getInstance().findPredefinedSdkByType(JavaSdk.getInstance());
+			sdk = mySdkTable.get().findPredefinedSdkByType(JavaSdk.getInstance());
 		}
 
 		if(sdk == null)
 		{
-			sdk = SdkTable.getInstance().findMostRecentSdkOfType(JavaSdk.getInstance());
+			sdk = mySdkTable.get().findMostRecentSdkOfType(JavaSdk.getInstance());
 		}
 
-		List<String> parameters = new ArrayList<String>();
+		List<String> parameters = new ArrayList<>();
 		if(sdk != null)
 		{
 			GeneralCommandLine generalCommandLine = new GeneralCommandLine();
 
-			((JavaSdkType) sdk.getSdkType()).setupCommandLine(generalCommandLine, sdk);
+			((JavaSdk) sdk.getSdkType()).setupCommandLine(generalCommandLine, sdk);
 			parameters.addAll(generalCommandLine.getParametersList().getList());
 		}
 		else

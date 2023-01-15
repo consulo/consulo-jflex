@@ -1,17 +1,14 @@
 package org.intellij.lang.jflex;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
-import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.intellij.lang.findUsages.FindUsagesProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
-import org.intellij.lang.jflex.lexer.JFlexMergingLexer;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import consulo.language.findUsage.FindUsagesProvider;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiNamedElement;
 import org.intellij.lang.jflex.psi.JFlexMacroDefinition;
 import org.intellij.lang.jflex.psi.JFlexStateDefinition;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,6 +16,7 @@ import javax.annotation.Nullable;
  * Date: 01.04.2008
  * Time: 23:31:29
  */
+@ExtensionImpl
 public class JFlexFindUsagesProvider implements FindUsagesProvider {
 
     public boolean canFindUsagesFor(@Nonnull PsiElement psiElement) {
@@ -29,11 +27,6 @@ public class JFlexFindUsagesProvider implements FindUsagesProvider {
     public String getDescriptiveName(@Nonnull PsiElement element) {
         String name = ((PsiNamedElement) element).getName();
         return name != null ? name : "";
-    }
-
-    @Nullable
-    public String getHelpId(@Nonnull PsiElement psiElement) {
-        return null;
     }
 
     @Nonnull
@@ -48,8 +41,9 @@ public class JFlexFindUsagesProvider implements FindUsagesProvider {
         return "";
     }
 
-    @Nullable
-    public WordsScanner getWordsScanner() {
-        return new DefaultWordsScanner(new JFlexMergingLexer(), JFlexElementTypes.IDENTIFIERS, JFlexElementTypes.COMMENTS, JFlexElementTypes.REGEXP_SCOPE);
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return JFlexLanguage.INSTANCE;
     }
 }

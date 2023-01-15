@@ -1,10 +1,11 @@
 package org.intellij.lang.jflex.psi.impl;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.TokenSet;
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.psi.JFlexStateDefinition;
 import org.intellij.lang.jflex.psi.JFlexStateStatement;
+
 import javax.annotation.Nonnull;
 
 /**

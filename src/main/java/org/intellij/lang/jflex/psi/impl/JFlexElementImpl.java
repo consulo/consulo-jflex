@@ -1,11 +1,12 @@
 package org.intellij.lang.jflex.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.impl.psi.ASTWrapperPsiElement;
 import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.psi.JFlexElement;
 import org.jetbrains.annotations.NonNls;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -20,11 +21,6 @@ public class JFlexElementImpl extends ASTWrapperPsiElement implements JFlexEleme
 
     public JFlexElementImpl(@Nonnull ASTNode node) {
         super(node);
-    }
-
-    @Nonnull
-    public Language getLanguage() {
-        return JFlexLanguage.INSTANCE;
     }
 
     public String toString() {
