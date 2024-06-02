@@ -1,7 +1,7 @@
 package consulo.jflex.vfs.backgroundTask;
 
 import com.intellij.java.language.impl.JavaFileType;
-import com.intellij.java.language.projectRoots.JavaSdk;
+import com.intellij.java.language.projectRoots.JavaSdkType;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.application.util.SystemInfo;
 import consulo.content.bundle.Sdk;
@@ -54,14 +54,10 @@ public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsC
 			sdk = ModuleUtilCore.getSdk(module, JavaModuleExtension.class);
 		}
 
+		SdkTable sdkTable = mySdkTable.get();
 		if(sdk == null)
 		{
-			sdk = mySdkTable.get().findPredefinedSdkByType(JavaSdk.getInstance());
-		}
-
-		if(sdk == null)
-		{
-			sdk = mySdkTable.get().findMostRecentSdkOfType(JavaSdk.getInstance());
+			sdk = sdkTable.findMostRecentSdk(it -> it.getSdkType() instanceof JavaSdkType);
 		}
 
 		List<String> parameters = new ArrayList<>();
@@ -69,7 +65,7 @@ public class JFlexBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfsC
 		{
 			GeneralCommandLine generalCommandLine = new GeneralCommandLine();
 
-			((JavaSdk) sdk.getSdkType()).setupCommandLine(generalCommandLine, sdk);
+			((JavaSdkType) sdk.getSdkType()).setupCommandLine(generalCommandLine, sdk);
 			parameters.addAll(generalCommandLine.getParametersList().getList());
 		}
 		else
