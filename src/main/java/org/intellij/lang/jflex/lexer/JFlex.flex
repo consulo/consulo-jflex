@@ -273,3 +273,5 @@ RegExpPostfix = [\*\+\?]
 
 //todo: remove from here
 {LineTerminator}+ { return JFlexElementTypes.WHITE_SPACE; }
+
+[^] { return JFlexElementTypes.BAD_CHARACTER; }
