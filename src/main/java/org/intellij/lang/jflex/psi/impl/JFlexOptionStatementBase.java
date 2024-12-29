@@ -5,8 +5,8 @@ import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.psi.JFlexExpression;
 import org.intellij.lang.jflex.psi.JFlexOptionStatement;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

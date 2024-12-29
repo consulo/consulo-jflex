@@ -10,8 +10,8 @@ import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.fileTypes.JFlexFileType;
 import org.intellij.lang.jflex.psi.*;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * JFlex PSI file.

@@ -8,7 +8,7 @@ import consulo.language.psi.PsiNamedElement;
 import org.intellij.lang.jflex.psi.JFlexMacroDefinition;
 import org.intellij.lang.jflex.psi.JFlexStateDefinition;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

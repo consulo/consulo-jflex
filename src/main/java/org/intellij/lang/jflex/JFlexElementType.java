@@ -3,7 +3,7 @@ package org.intellij.lang.jflex;
 import consulo.language.ast.IElementType;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 public class JFlexElementType extends IElementType {
     private final IElementType parsedType;

@@ -9,7 +9,7 @@ import consulo.logging.Logger;
 import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.util.JFlexBundle;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Parser.

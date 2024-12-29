@@ -4,7 +4,7 @@ import consulo.document.util.TextRange;
 import consulo.language.psi.LiteralTextEscaper;
 import org.intellij.lang.jflex.psi.JFlexJavaCode;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

@@ -7,7 +7,7 @@ import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.psi.JFlexElement;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * JFlex base element.

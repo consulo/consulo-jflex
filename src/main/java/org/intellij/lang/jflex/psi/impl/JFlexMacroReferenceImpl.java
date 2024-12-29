@@ -13,8 +13,8 @@ import org.intellij.lang.jflex.psi.JFlexMacroReference;
 import org.intellij.lang.jflex.psi.JFlexPsiFile;
 import org.intellij.lang.jflex.validation.JFlexAnnotatingVisitor;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

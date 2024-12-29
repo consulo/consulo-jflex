@@ -7,8 +7,8 @@ import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
 import org.intellij.lang.jflex.JFlexLanguage;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * JFlex file type.

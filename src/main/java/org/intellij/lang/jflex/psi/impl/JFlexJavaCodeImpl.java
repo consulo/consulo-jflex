@@ -11,8 +11,8 @@ import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.injection.EmbeddedJavaLiteralTextEscaper;
 import org.intellij.lang.jflex.psi.JFlexJavaCode;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import java.util.List;
 
 /**

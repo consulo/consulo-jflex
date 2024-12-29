@@ -9,7 +9,7 @@ import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.editor.JFlexHighlighterColors;
 import org.intellij.lang.jflex.lexer.JFlexHighlighterLexer;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 

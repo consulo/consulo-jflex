@@ -20,7 +20,7 @@ import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.lexer.JFlexParsingLexer;
 import org.intellij.lang.jflex.psi.impl.*;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * JFlex parser.

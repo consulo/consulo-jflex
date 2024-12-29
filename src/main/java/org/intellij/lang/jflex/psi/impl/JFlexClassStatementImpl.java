@@ -3,7 +3,7 @@ package org.intellij.lang.jflex.psi.impl;
 import consulo.language.ast.ASTNode;
 import org.intellij.lang.jflex.psi.JFlexClassStatement;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Implementation of JFlex class statement.

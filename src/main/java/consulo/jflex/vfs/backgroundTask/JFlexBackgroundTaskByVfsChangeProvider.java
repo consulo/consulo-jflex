@@ -23,7 +23,7 @@ import org.intellij.lang.jflex.fileTypes.JFlexFileType;
 import org.intellij.lang.jflex.psi.JFlexElement;
 import org.intellij.lang.jflex.psi.JFlexPsiFile;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 

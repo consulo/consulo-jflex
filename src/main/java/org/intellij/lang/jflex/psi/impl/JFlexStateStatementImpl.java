@@ -6,7 +6,7 @@ import org.intellij.lang.jflex.JFlexElementTypes;
 import org.intellij.lang.jflex.psi.JFlexStateDefinition;
 import org.intellij.lang.jflex.psi.JFlexStateStatement;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

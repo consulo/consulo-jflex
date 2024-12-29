@@ -6,7 +6,7 @@ import consulo.language.util.IncorrectOperationException;
 import org.intellij.lang.jflex.psi.JFlexStateDefinition;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
