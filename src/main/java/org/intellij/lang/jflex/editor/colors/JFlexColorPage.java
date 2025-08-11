@@ -3,10 +3,12 @@ package org.intellij.lang.jflex.editor.colors;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.colorScheme.TextAttributesKey;
 import consulo.colorScheme.setting.AttributesDescriptor;
+import consulo.jflex.localize.JFlexLocalize;
 import consulo.language.Language;
 import consulo.language.editor.colorScheme.setting.ColorSettingsPage;
 import consulo.language.editor.highlight.SyntaxHighlighter;
 import consulo.language.editor.highlight.SyntaxHighlighterFactory;
+import consulo.localize.LocalizeValue;
 import org.intellij.lang.jflex.JFlexLanguage;
 import org.intellij.lang.jflex.editor.JFlexHighlighterColors;
 import org.jetbrains.annotations.NonNls;
@@ -75,8 +77,8 @@ final class JFlexColorPage implements ColorSettingsPage {
     }
 
     @Nonnull
-    public String getDisplayName() {
-        return "JFlex";
+    public LocalizeValue getDisplayName() {
+        return JFlexLocalize.jflex();
     }
 
     @Nonnull
