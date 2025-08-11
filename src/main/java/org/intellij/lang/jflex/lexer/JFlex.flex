@@ -56,7 +56,7 @@ RegExpPostfix = [\*\+\?]
 <YYINITIAL> {
     {SectionSeparator}        { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.SECTION_SIGN; }
     {AnySpace}+               { yybegin(YYINITIAL); return JFlexElementTypes.JAVA_CODE; }
-    .                         { yybegin(YYINITIAL); return JFlexElementTypes.JAVA_CODE; }
+    [^]                       { yybegin(YYINITIAL); return JFlexElementTypes.JAVA_CODE; }
 }
 
 <OPTIONS_AND_DECLARATIONS> {
@@ -66,24 +66,24 @@ RegExpPostfix = [\*\+\?]
     {SectionSeparator}        { yybegin(LEXICAL_RULES); return JFlexElementTypes.SECTION_SIGN; }
     "%"                       { yybegin(OPTION); return JFlexElementTypes.OPTION_SIGN;}
     {Identifier}              { yybegin(IDENTIFIER); return JFlexElementTypes.MACROS; }
-    .                         { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                       { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.BAD_CHARACTER; }
 }
 
 <LEXICAL_RULES> {
     {AnySpace}+               { yybegin(LEXICAL_RULES); return JFlexElementTypes.WHITE_SPACE; }
     {Comment}                 { yybegin(LEXICAL_RULES); return JFlexElementTypes.COMMENT; }
     "<"                       { yybegin(STATE); return JFlexElementTypes.STATE_LEFT_ANGLE_BRACKET; }
-    .                         { yybegin(ACTION_REGEXP); yypushback(yylength()); }
+    [^]                       { yybegin(ACTION_REGEXP); yypushback(yylength()); }
 }
 
 <IDENTIFIER> {
     {WhiteSpace}+              { yybegin(IDENTIFIER); return JFlexElementTypes.WHITE_SPACE; }
     "="                        { yybegin(IDENTIFIER_REGEXP_LITERAL); return JFlexElementTypes.EQ; }
-    .                          { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                        { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.BAD_CHARACTER; }
 }
 <IDENTIFIER_REGEXP_LITERAL> {
     {WhiteSpace}+              { yybegin(IDENTIFIER_REGEXP_LITERAL); return JFlexElementTypes.WHITE_SPACE; }
-    .                          { yybegin(IDENTIFIER_REGEXP); yypushback(yylength()); }
+    [^]                        { yybegin(IDENTIFIER_REGEXP); yypushback(yylength()); }
 }
 <IDENTIFIER_REGEXP> {
     {LineTerminator}+          { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.WHITE_SPACE; }
@@ -97,20 +97,20 @@ RegExpPostfix = [\*\+\?]
     {RegExpPrefix}             { yybegin(IDENTIFIER_REGEXP); return JFlexElementTypes.REGEXP_PREFIX; }
     {RegExpPostfix}            { yybegin(IDENTIFIER_REGEXP); return JFlexElementTypes.REGEXP_POSTFIX; }
     {StringLiteral}            { yybegin(IDENTIFIER_REGEXP); return JFlexElementTypes.REGEXP_STRING_LITERAL; }
-    .                          { yybegin(IDENTIFIER_REGEXP); return JFlexElementTypes.REGEXP_SYMBOL; }
+    [^]                        { yybegin(IDENTIFIER_REGEXP); return JFlexElementTypes.REGEXP_SYMBOL; }
 }
 <IDENTIFIER_REGEXP_IDENTIFIER> {
     {LineTerminator}+          { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.WHITE_SPACE; }
     {Identifier}               { yybegin(IDENTIFIER_REGEXP_IDENTIFIER); return JFlexElementTypes.REGEXP_MACROS_REF; }
     "}"                        { yybegin(IDENTIFIER_REGEXP); return JFlexElementTypes.REGEXP_RIGHT_BRACE; }
-    .                          { yybegin(IDENTIFIER_REGEXP); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                        { yybegin(IDENTIFIER_REGEXP); return JFlexElementTypes.BAD_CHARACTER; }
 }
 <IDENTIFIER_REGEXP_CLASS> {
     {LineTerminator}+          { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.WHITE_SPACE; }
     {EscapedCharacter}         { yybegin(IDENTIFIER_REGEXP_CLASS); return JFlexElementTypes.REGEXP_CLASS_SYMBOL; }
     "]"                        { yybegin(IDENTIFIER_REGEXP); return JFlexElementTypes.REGEXP_RIGHT_BRACKET;}
     {StringLiteral}            { yybegin(IDENTIFIER_REGEXP_CLASS); return JFlexElementTypes.REGEXP_STRING_LITERAL; }
-    .                          { yybegin(IDENTIFIER_REGEXP_CLASS); return JFlexElementTypes.REGEXP_CLASS_SYMBOL; }
+    [^]                        { yybegin(IDENTIFIER_REGEXP_CLASS); return JFlexElementTypes.REGEXP_CLASS_SYMBOL; }
 }
 
 <OPTION> {
@@ -165,36 +165,36 @@ RegExpPostfix = [\*\+\?]
     "}"                        { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.OPTION_RIGHT_BRACE; }
     {LineTerminator}+          { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.WHITE_SPACE; }
     {WhiteSpace}+              { yybegin(OPT_ERROR); return JFlexElementTypes.OPTION_WHITE_SPACE; }
-    .                          { yybegin(OPT_ERROR); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                        { yybegin(OPT_ERROR); return JFlexElementTypes.BAD_CHARACTER; }
 }
 <OPT_ERROR> {
     {LineTerminator}+          { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.WHITE_SPACE; }
     {WhiteSpace}+              { yybegin(OPT_ERROR); return JFlexElementTypes.OPTION_WHITE_SPACE; }
-    .                          { yybegin(OPT_ERROR); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                        { yybegin(OPT_ERROR); return JFlexElementTypes.BAD_CHARACTER; }
 }
 <OPT_PARAM> {
     {LineTerminator}+          { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.WHITE_SPACE; }
     {WhiteSpace}+              { yybegin(OPT_PARAM); return JFlexElementTypes.OPTION_WHITE_SPACE; }
     {Identifier}               { yybegin(OPT_PARAM); return JFlexElementTypes.OPTION_PARAMETER; }
-    .                          { yybegin(OPT_PARAM); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                        { yybegin(OPT_PARAM); return JFlexElementTypes.BAD_CHARACTER; }
 }
 <OPT_PARAMS> {
     {LineTerminator}+          { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.WHITE_SPACE; }
     {WhiteSpace}+              { yybegin(OPT_PARAMS); return JFlexElementTypes.OPTION_WHITE_SPACE; }
     {Identifier}               { yybegin(OPT_PARAMS); return JFlexElementTypes.OPTION_PARAMETER; }
     ","                        { yybegin(OPT_PARAMS); return JFlexElementTypes.OPTION_COMMA; }
-    .                          { yybegin(OPT_PARAMS); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                        { yybegin(OPT_PARAMS); return JFlexElementTypes.BAD_CHARACTER; }
 }
 <OPT_CODE> {
     {LineTerminator}+          { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.WHITE_SPACE; }
     "{"                        { yybegin(OPT_JAVA_CODE); return JFlexElementTypes.OPTION_LEFT_BRACE; }
     "}"                        { yybegin(OPT_CODE); return JFlexElementTypes.OPTION_RIGHT_BRACE; }
-    .                          { yybegin(OPT_CODE); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                        { yybegin(OPT_CODE); return JFlexElementTypes.BAD_CHARACTER; }
 }
 <OPT_JAVA_CODE> {
     {JavaCodeEndOption}        { yybegin(OPTIONS_AND_DECLARATIONS); yypushback(yylength()); }
     {AnySpace}+                { yybegin(OPT_JAVA_CODE); return JFlexElementTypes.JAVA_CODE; }
-    .                          { yybegin(OPT_JAVA_CODE); return JFlexElementTypes.JAVA_CODE; }
+    [^]                        { yybegin(OPT_JAVA_CODE); return JFlexElementTypes.JAVA_CODE; }
 }
 <OPT_EXCEPTION> {
     {LineTerminator}+          { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.WHITE_SPACE; }
@@ -203,14 +203,14 @@ RegExpPostfix = [\*\+\?]
     {WhiteSpace}+              { yybegin(OPT_EXCEPTION); return JFlexElementTypes.OPTION_WHITE_SPACE; }
     {Identifier}               { yybegin(OPT_EXCEPTION); return JFlexElementTypes.OPTION_PARAMETER; }
     ","                        { yybegin(OPT_EXCEPTION); return JFlexElementTypes.OPTION_COMMA; }
-    .                          { yybegin(OPT_EXCEPTION); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                        { yybegin(OPT_EXCEPTION); return JFlexElementTypes.BAD_CHARACTER; }
 }
 <OPT_BOOLEAN> {
     {LineTerminator}+          { yybegin(OPTIONS_AND_DECLARATIONS); return JFlexElementTypes.WHITE_SPACE; }
     {WhiteSpace}+              { yybegin(OPT_BOOLEAN); return JFlexElementTypes.OPTION_WHITE_SPACE; }
     "false"                    { yybegin(OPT_BOOLEAN); return JFlexElementTypes.FALSE_KEYWORD; }
     "true"                     { yybegin(OPT_BOOLEAN); return JFlexElementTypes.TRUE_KEYWORD; }
-    .                          { yybegin(OPT_BOOLEAN); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                        { yybegin(OPT_BOOLEAN); return JFlexElementTypes.BAD_CHARACTER; }
 }
 
 <STATE> {
@@ -219,7 +219,7 @@ RegExpPostfix = [\*\+\?]
     {Identifier}               { yybegin(STATE); return JFlexElementTypes.STATE_REF; }
     ","                        { yybegin(STATE); return JFlexElementTypes.STATE_COMMA; }
     ">"                        { yybegin(RULE); return JFlexElementTypes.STATE_LEFT_ANGLE_BRACKET; }
-    .                          { yybegin(STATE); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                        { yybegin(STATE); return JFlexElementTypes.BAD_CHARACTER; }
 }
 
 <RULE> {
@@ -229,7 +229,7 @@ RegExpPostfix = [\*\+\?]
     "{"                        { yybegin(RULE); return JFlexElementTypes.LEFT_BRACE; }
     "<"                        { yybegin(STATE); return JFlexElementTypes.STATE_RIGHT_ANGLE_BRACKET; }
     "}"                        { yybegin(LEXICAL_RULES); return JFlexElementTypes.RIGHT_BRACE; }
-    .                          { yybegin(ACTION_REGEXP); yypushback(yylength()); }
+    [^]                        { yybegin(ACTION_REGEXP); yypushback(yylength()); }
 }
 <ACTION_REGEXP> {
     {LineTerminator}+          { yybegin(LEXICAL_RULES); return JFlexElementTypes.WHITE_SPACE; }
@@ -244,31 +244,31 @@ RegExpPostfix = [\*\+\?]
     {RegExpPrefix}             { yybegin(ACTION_REGEXP); return JFlexElementTypes.REGEXP_PREFIX; }
     {RegExpPostfix}            { yybegin(ACTION_REGEXP); return JFlexElementTypes.REGEXP_POSTFIX; }
     {StringLiteral}            { yybegin(ACTION_REGEXP); return JFlexElementTypes.REGEXP_STRING_LITERAL; }
-    .                          { yybegin(ACTION_REGEXP); return JFlexElementTypes.REGEXP_SYMBOL; }
+    [^]                        { yybegin(ACTION_REGEXP); return JFlexElementTypes.REGEXP_SYMBOL; }
 }
 <ACTION_REGEXP_IDENTIFIER> {
     {Identifier}               { yybegin(ACTION_REGEXP_IDENTIFIER); return JFlexElementTypes.REGEXP_MACROS_REF; }
     "{"                        { yybegin(ACTION_REGEXP_IDENTIFIER); return JFlexElementTypes.REGEXP_LEFT_BRACE; }
     "}"                        { yybegin(ACTION_REGEXP); return JFlexElementTypes.REGEXP_RIGHT_BRACE; }
-    .                          { yybegin(ACTION_REGEXP); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                        { yybegin(ACTION_REGEXP); return JFlexElementTypes.BAD_CHARACTER; }
 }
 <ACTION_REGEXP_CLASS> {
     {LineTerminator}+          { yybegin(LEXICAL_RULES); return JFlexElementTypes.WHITE_SPACE; }
     {EscapedCharacter}         { yybegin(ACTION_REGEXP_CLASS); return JFlexElementTypes.REGEXP_CLASS_SYMBOL; }
     "]"                        { yybegin(ACTION_REGEXP); return JFlexElementTypes.REGEXP_RIGHT_BRACKET;}
     {StringLiteral}            { yybegin(ACTION_REGEXP_CLASS); return JFlexElementTypes.REGEXP_STRING_LITERAL; }
-    .                          { yybegin(ACTION_REGEXP_CLASS); return JFlexElementTypes.REGEXP_CLASS_SYMBOL; }
+    [^]                        { yybegin(ACTION_REGEXP_CLASS); return JFlexElementTypes.REGEXP_CLASS_SYMBOL; }
 }
 <ACTION> {
     {AnySpace}+                { yybegin(ACTION); return JFlexElementTypes.WHITE_SPACE; }
     "{"                        { braceCounter = 0; yybegin(ACTION_JAVA_CODE); return JFlexElementTypes.LEFT_BRACE; }
-    .                          { yybegin(RULE); return JFlexElementTypes.BAD_CHARACTER; }
+    [^]                        { yybegin(RULE); return JFlexElementTypes.BAD_CHARACTER; }
 }
 <ACTION_JAVA_CODE> {
     {AnySpace}+                { yybegin(ACTION_JAVA_CODE); return JFlexElementTypes.JAVA_CODE; }
     "{"                        { braceCounter++; yybegin(ACTION_JAVA_CODE); return JFlexElementTypes.JAVA_CODE; }
     "}"                        { braceCounter--; if (braceCounter < 0) {yybegin(RULE); return JFlexElementTypes.RIGHT_BRACE; } else { yybegin(ACTION_JAVA_CODE); return JFlexElementTypes.JAVA_CODE; }}
-    .                          { yybegin(ACTION_JAVA_CODE); return JFlexElementTypes.JAVA_CODE; }
+    [^]                        { yybegin(ACTION_JAVA_CODE); return JFlexElementTypes.JAVA_CODE; }
 }
 
 //todo: remove from here
