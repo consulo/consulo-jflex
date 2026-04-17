@@ -3,7 +3,25 @@
  * @since 15/01/2023
  */
 module consulo.jflex {
-    requires consulo.ide.api;
+    requires consulo.application.api;
+    requires consulo.application.content.api;
+    requires consulo.code.editor.api;
+    requires consulo.color.scheme.api;
+    requires consulo.component.api;
+    requires consulo.document.api;
+    requires consulo.language.api;
+    requires consulo.language.impl;
+    requires consulo.language.editor.api;
+    requires consulo.localize.api;
+    requires consulo.logging.api;
+    requires consulo.module.api;
+    requires consulo.process.api;
+    requires consulo.project.api;
+    requires consulo.ui.api;
+    requires consulo.virtual.file.system.api;
+    requires consulo.virtual.file.watcher.api;
+    requires consulo.util.collection;
+    requires consulo.util.lang;
 
     requires consulo.java;
     
